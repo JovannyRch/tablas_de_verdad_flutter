@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tablas_de_verdad/widgets/ButtonWidget.dart';
 import 'package:tablas_de_verdad/widgets/DisplayWidget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,15 +33,32 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buttonContainer() {
     return Expanded(
       child: Container(
+        padding: EdgeInsets.all(15.0),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
-          boxShadow: [
-            BoxShadow(offset: Offset(-1,-1),color: Colors.black12),
-          
-          ]
+            color: Colors.grey.shade50,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0)),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(-1, -1),
+                color: Colors.black12,
+                blurRadius: 2.0,
+              ),
+            ]),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Button(icon: Icons.delete, onTap: handleClickButton),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
+
+  void handleClickButton(String icon) {}
 }
