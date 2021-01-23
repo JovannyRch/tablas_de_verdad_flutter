@@ -3,7 +3,17 @@ import 'package:flutter/cupertino.dart';
 class AppProvider with ChangeNotifier {
   
 
-  String _input;
+  String _input = "";
+  bool _isUppercase = true;
+
+  bool get isUppercase{
+    return _isUppercase;
+  }
+
+  set isUppercase (bool data){
+    _isUppercase = data;
+    notifyListeners();
+  }
 
   String get input{
     return _input;
@@ -20,12 +30,23 @@ class AppProvider with ChangeNotifier {
   }
 
   void removerLetter(){
-    _input =  _input.substring(0,_input.length-2);
+    _input =  _input.substring(0,_input.length-1);
     notifyListeners();
   }
 
   void clearInput(){
     _input = "";
+    notifyListeners();
+  }
+
+  void changeCase(){
+    _isUppercase = !_isUppercase;
+    if(_isUppercase){
+      _input = _input.toUpperCase();
+    }else{
+      _input = _input.toLowerCase();
+      
+    }
     notifyListeners();
   }
 
