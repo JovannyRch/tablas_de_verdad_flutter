@@ -60,13 +60,35 @@ class Button extends StatelessWidget {
       );
     }
     return Text(
-      appProvider.isUppercase ? label.toUpperCase() : label.toLowerCase(),
+      _getText(),
       style: TextStyle(
         color: getColorText(),
         fontWeight: isOperator ? FontWeight.w800 : FontWeight.w600,
         fontSize: getFontSize(),
       ),
     );
+  }
+
+  String _getText() {
+
+    if(label == Operators.FALSE || label == Operators.TRUE || label == Operators.MODE){
+      return label;
+    }
+
+
+    if (label == Operators.ABC) {
+      if (!appProvider.isUppercase) {
+        return label.toUpperCase();
+      } else {
+        return label.toLowerCase();
+      }
+    }
+
+    if (appProvider.isUppercase) {
+      return label.toUpperCase();
+    } else {
+      return label.toLowerCase();
+    }
   }
 
   Color getColorText() {
@@ -85,8 +107,6 @@ class Button extends StatelessWidget {
   }
 
   double getFontSize() {
-
-
     switch (label) {
       case Operators.MODE:
       case Operators.ABC:

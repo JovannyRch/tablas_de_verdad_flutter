@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/models/operators.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
+import 'package:tablas_de_verdad/screens/result_screen.dart';
 import 'package:tablas_de_verdad/widgets/ButtonWidget.dart';
 import 'package:tablas_de_verdad/widgets/DisplayWidget.dart';
 import 'package:provider/provider.dart';
@@ -16,18 +17,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   AppProvider appProvider;
-  final double SPACE_BETWEEN_ROWS = 10.0;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    /* WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       appProvider = context.read<AppProvider>();
-    });
+    }); */
   }
 
   @override
   Widget build(BuildContext context) {
+     appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       body: _body(),
     );
@@ -63,6 +64,33 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            appProvider.isBasic
+                ? Container()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Button(
+                          icon: FontAwesomeIcons.trash,
+                          onTap: handleClickButton,
+                          label: CLEAR_INPUT),
+                      Button(
+                          onTap: handleClickButton,
+                          label: "[",
+                          isOperator: true),
+                      Button(
+                          onTap: handleClickButton,
+                          label: "]",
+                          isOperator: true),
+                      Button(
+                          onTap: handleClickButton,
+                          label: "{",
+                          isOperator: true),
+                      Button(
+                          onTap: handleClickButton,
+                          label: "}",
+                          isOperator: true),
+                    ],
+                  ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -79,19 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     isOperator: true),
                 Button(
                     onTap: handleClickButton, label: "MODE", isOperator: true),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Button(
-                    icon: FontAwesomeIcons.trash,
-                    onTap: handleClickButton,
-                    label: CLEAR_INPUT),
-                Button(onTap: handleClickButton, label: "[", isOperator: true),
-                Button(onTap: handleClickButton, label: "]", isOperator: true),
-                Button(onTap: handleClickButton, label: "{", isOperator: true),
-                Button(onTap: handleClickButton, label: "}", isOperator: true),
               ],
             ),
             _rowLettersWithOperator("A", "B", "C", "D", Operators.NOT),
@@ -119,66 +134,70 @@ class _HomeScreenState extends State<HomeScreen> {
                     isOperator: true),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.XOR,
-                  isOperator: true,
-                ),
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.XOR2,
-                  isOperator: true,
-                ),
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.NAND,
-                  isOperator: true,
-                ),
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.NOR,
-                  isOperator: true,
-                ),
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.ANTICODICIONAL,
-                  isOperator: true,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.NOT_CONDITIONAL,
-                  isOperator: true,
-                ),
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.NOT_CONDITIONAL_INVERSE,
-                  isOperator: true,
-                ),
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.NOT_BICONDITIONAL,
-                  isOperator: true,
-                ),
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.TAUTOLOGY,
-                  isOperator: true,
-                ),
-                Button(
-                  onTap: handleClickButton,
-                  label: Operators.CONTRADICTION,
-                  isOperator: true,
-                ),
-              ],
-            ),
+            appProvider.isBasic
+                ? Container()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.XOR,
+                        isOperator: true,
+                      ),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.XOR2,
+                        isOperator: true,
+                      ),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.NAND,
+                        isOperator: true,
+                      ),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.NOR,
+                        isOperator: true,
+                      ),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.ANTICODICIONAL,
+                        isOperator: true,
+                      ),
+                    ],
+                  ),
+            appProvider.isBasic
+                ? Container()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.NOT_CONDITIONAL,
+                        isOperator: true,
+                      ),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.NOT_CONDITIONAL_INVERSE,
+                        isOperator: true,
+                      ),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.NOT_BICONDITIONAL,
+                        isOperator: true,
+                      ),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.TAUTOLOGY,
+                        isOperator: true,
+                      ),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.CONTRADICTION,
+                        isOperator: true,
+                      ),
+                    ],
+                  ),
           ],
         ),
       ),
@@ -186,24 +205,26 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void handleClickButton(String label) {
+    print(label);
     if (label == CLEAR_INPUT) {
       appProvider.clearInput();
     } else if (label == REMOVE_LETTER) {
       appProvider.removerLetter();
+    } else if (label == Operators.ABC) {
+      appProvider.changeCase();
+    } else if (label == Operators.EQUAL) {
+      handleGoResult();
+    } else if (label == Operators.MODE) {
+      appProvider.changeMode();
     } else {
       appProvider.addLeter(label);
     }
   }
 
-  Widget _rowLetters(String a, String b, String c, String d) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Button(onTap: handleClickButton, label: a),
-        Button(onTap: handleClickButton, label: b),
-        Button(onTap: handleClickButton, label: c),
-        Button(onTap: handleClickButton, label: d),
-      ],
+  void handleGoResult() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ResultScreen()),
     );
   }
 
