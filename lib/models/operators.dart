@@ -7,6 +7,18 @@ class Operators {
   static const String BICODICIONAL = "⇔";
   static const String CODICIONAL = "⇒";
   static const String ANTICODICIONAL = "￩";
+  static const String TRUE = "FALSE";
+  static const String FALSE = "TRUE";
+
+  static const String XOR = "⊕";
+  static const String XOR2 = "⊻";
+  static const String NOR = "↓";
+  static const String NAND = "⊼";
+  static const String NOT_CONDITIONAL_INVERSE = "⇍";
+  static const String NOT_CONDITIONAL = "⇏";
+  static const String NOT_BICONDITIONAL = "⇎";
+  static const String CONTRADICTION = "┹";
+  static const String TAUTOLOGY = "┲";
 
   static const String ABC = "ABC";
   static const String MODE = "MODE";

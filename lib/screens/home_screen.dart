@@ -107,16 +107,76 @@ class _HomeScreenState extends State<HomeScreen> {
                 Button(onTap: handleClickButton, label: "Z"),
                 Button(
                     onTap: handleClickButton,
-                    label: Operators.ANTICODICIONAL,
+                    label: Operators.TRUE,
                     isOperator: true),
                 Button(
                     onTap: handleClickButton,
-                    label: Operators.ANTICODICIONAL,
+                    label: Operators.FALSE,
                     isOperator: true),
                 Button(
                     onTap: handleClickButton,
                     label: Operators.EQUAL,
                     isOperator: true),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.XOR,
+                  isOperator: true,
+                ),
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.XOR2,
+                  isOperator: true,
+                ),
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.NAND,
+                  isOperator: true,
+                ),
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.NOR,
+                  isOperator: true,
+                ),
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.ANTICODICIONAL,
+                  isOperator: true,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.NOT_CONDITIONAL,
+                  isOperator: true,
+                ),
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.NOT_CONDITIONAL_INVERSE,
+                  isOperator: true,
+                ),
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.NOT_BICONDITIONAL,
+                  isOperator: true,
+                ),
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.TAUTOLOGY,
+                  isOperator: true,
+                ),
+                Button(
+                  onTap: handleClickButton,
+                  label: Operators.CONTRADICTION,
+                  isOperator: true,
+                ),
               ],
             ),
           ],

@@ -15,8 +15,12 @@ class Button extends StatelessWidget {
   AppProvider appProvider;
 
   Button(
-      {this.label, @required this.onTap, this.icon, this.isOperator = false, this.isExpanded = false});
-  double radius = 55.0;
+      {this.label,
+      @required this.onTap,
+      this.icon,
+      this.isOperator = false,
+      this.isExpanded = false});
+  double radius = 40.0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +30,13 @@ class Button extends StatelessWidget {
         onTap(label);
       },
       child: Container(
-       /*  margin: EdgeInsets.only(right: 5.0), */
+        /*  margin: EdgeInsets.only(right: 5.0), */
         height: radius,
-        width: isExpanded? radius*2.3:radius,
+        width: isExpanded ? radius * 2.3 : radius,
         decoration: BoxDecoration(
-          shape: isExpanded?BoxShape.rectangle: BoxShape.circle,
+            shape: isExpanded ? BoxShape.rectangle : BoxShape.circle,
             color: _getBgColor(),
-            borderRadius: isExpanded?BorderRadius.circular(20.0):null,
+            borderRadius: isExpanded ? BorderRadius.circular(20.0) : null,
             boxShadow: [
               BoxShadow(
                 offset: Offset(2, 1),
@@ -63,46 +67,51 @@ class Button extends StatelessWidget {
         fontSize: getFontSize(),
       ),
     );
-    
   }
 
-  Color getColorText(){
-    
-    if(label == Operators.EQUAL){
-      return Colors.white;
+  Color getColorText() {
+    switch (label) {
+      case Operators.EQUAL:
+      case Operators.FALSE:
+      case Operators.TRUE:
+        return Colors.white;
     }
 
-    if(isOperator){
+    if (isOperator) {
       return kMainColor;
     }
 
     return Colors.black54;
   }
 
-  double getFontSize(){
-    if(label == Operators.MODE){
-      return 14.0;
-    }
+  double getFontSize() {
 
-    if(label == Operators.ABC){
-      return 14.0;
+
+    switch (label) {
+      case Operators.MODE:
+      case Operators.ABC:
+        return 14.0;
+      case Operators.FALSE:
+      case Operators.TRUE:
+      case Operators.TRUE:
+        return 10.0;
+      default:
+        return 25.0;
     }
-    return 25.0;
   }
 
   Color _getBgColor() {
-    if (label == CLEAR_INPUT) {
-      return kSecondaryColor;
+    switch (label) {
+      case CLEAR_INPUT:
+      case REMOVE_LETTER:
+        return kSecondaryColor;
+      case Operators.EQUAL:
+        return kMainColor;
+      case Operators.TRUE:
+        return Colors.green;
+      case Operators.FALSE:
+        return Colors.red;
     }
-
-    if (label == REMOVE_LETTER) {
-      return kSecondaryColor;
-    }
-    if(label == Operators.EQUAL){
-      return kMainColor;
-    }
-
-
 
     if (isOperator) {
       return Colors.white;

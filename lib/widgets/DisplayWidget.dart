@@ -15,7 +15,7 @@ class Display extends StatelessWidget {
     appProvider = Provider.of<AppProvider>(context);
     _size = MediaQuery.of(context).size;
     return Container(
-      height: _size.height * 0.23,
+      height: 150.0,
       width: double.infinity,
       padding: EdgeInsets.only(bottom: 10.0, right: 20.0),
       decoration: BoxDecoration(
