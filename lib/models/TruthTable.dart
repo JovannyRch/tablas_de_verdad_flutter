@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:tablas_de_verdad/models/operators.dart';
+import 'package:tablas_de_verdad/models/RowTable.dart';
+
 
 class TruthTable {
   String infix;
@@ -9,7 +11,7 @@ class TruthTable {
   int counter1s = 0;
   int counters0s = 0;
   List<String> variables = [];
-  List<List<String>> table = [];
+  List<RowTable> table = [];
   List<String> notOpers = [Operators.NOT, Operators.NOT2, Operators.NOT3];
   List<String> andOpers = [Operators.AND, Operators.AND2];
   List<String> orOpers = [Operators.OR, Operators.OR2];
@@ -62,7 +64,7 @@ class TruthTable {
       combination = formatCombination(combination, sizeOfCombinations);
       String combinationInPostfix = varSubstitutions(postfix, combination);
       int result = evaluation(combinationInPostfix);
-      table.add([combination, "$result"]);
+      table.add(new RowTable(combination: combination, result: "$result" ));
     
       if(result == 1){
         counter1s++;
