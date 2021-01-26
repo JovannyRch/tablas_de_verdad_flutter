@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
+import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/models/operators.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
 import 'package:tablas_de_verdad/screens/result_screen.dart';
@@ -222,6 +223,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void handleGoResult() {
+
+    //TODO: Check if input is correctly formed
+
+    TruthTable t = new TruthTable(appProvider.input);
+    t.convertInfixToPostix();
+
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ResultScreen()),

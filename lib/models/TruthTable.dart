@@ -4,6 +4,7 @@ import 'package:tablas_de_verdad/models/operators.dart';
 
 class TruthTable {
   String infix;
+  String postfix;
   TruthTable(this.infix);
   int counter1s = 0;
   int counters0s = 0;
@@ -13,6 +14,7 @@ class TruthTable {
   List<String> andOpers = [Operators.AND, Operators.AND2];
   List<String> orOpers = [Operators.OR, Operators.OR2];
   List<String> xorOpers = [Operators.XOR, Operators.XOR2];
+  String errorMessage = "";
 
   Map<String, int> priorities = {
     "~": 16,
@@ -37,11 +39,17 @@ class TruthTable {
     "(": 0,
   };
 
-  String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   String tipo = "";
 
+  void convertInfixToPostix(){
+    this.postfix = this.infixToPostfix(this.infix);
+  }
+
+
+
   void calculate() {
-    String postfix = this.infixToPostfix(this.infix);
+    
     table = [];
     counter1s = 0;
     counters0s = 0;
@@ -55,7 +63,7 @@ class TruthTable {
       String combinationInPostfix = varSubstitutions(postfix, combination);
       int result = evaluation(combinationInPostfix);
       table.add([combination, "$result"]);
-      print("$combination | $result");
+    
       if(result == 1){
         counter1s++;
       }
@@ -197,8 +205,7 @@ class TruthTable {
     List<String> postfixList = [];
 
     for (String token in infix.split("")) {
-      if (this.alphabet.contains(token) ||
-          this.alphabet.toLowerCase().contains(token)) {
+      if (this.alphabet.contains(token)) {
         postfixList.add(token);
         if (!this.variables.contains(token)) {
           this.variables.add(token);
@@ -224,11 +231,62 @@ class TruthTable {
     }
     return postfixList.join();
   }
+
+  bool checkIfIsCorrectlyFormed(){
+    List<String> pila = [];
+    for(String c in this.postfix.split("")){
+      if(isOpertator(c)){
+        if(pila.isEmpty){
+          if(required2Operators(c)){
+            this.errorMessage = "El operador $c requiere 1 operandos";
+          }
+          else{
+            this.errorMessage = "El operador $c requiere 1 operando";
+          }
+          return false;
+        }
+        int a = int.parse(pila.removeLast());
+        String resultado;
+        if(required2Operators(c)){
+          if(pila.isEmpty){
+
+            if(pila.isEmpty){
+              this.errorMessage = "El operador $c necesita 2 operandos";
+              return false;
+            }
+            pila.removeLast(); 
+            resultado = "0";
+          }
+        }
+        else if(notOpers.contains(c)){
+          resultado = "9";
+        }
+        pila.add(resultado);
+      }
+      else{
+        pila.add(c);
+      }
+
+    }
+
+    if(pila.length == 1){
+      return true;
+    }
+    else{
+      this.errorMessage = "La proposición lógica no está bien formada";
+      return false;
+    }
+  }
+
+  bool required2Operators(String operator){
+    if(this.notOpers.contains(operator)) return false;
+    return true;
+  }
+
+  bool isOpertator(String operator){
+    if(this.alphabet.contains(operator)) return false;
+    return true;
+  }
+
 }
 
-
-
-void main() {
-  TruthTable t = TruthTable("A∨~B");
-  t.calculate();
-}
