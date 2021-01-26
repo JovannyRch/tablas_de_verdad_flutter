@@ -64,7 +64,7 @@ class TruthTable {
       combination = formatCombination(combination, sizeOfCombinations);
       String combinationInPostfix = varSubstitutions(postfix, combination);
       int result = evaluation(combinationInPostfix);
-      table.add(new RowTable(combination: combination, result: "$result"));
+      table.add(new RowTable(index: i,combination: combination, result: "$result"));
 
       if (result == 1) {
         counter1s++;
@@ -73,11 +73,11 @@ class TruthTable {
       }
     }
     if (counter1s == totalCombinations) {
-      tipo = "tautologia";
+      tipo = "Tautología";
     } else if (counters0s == totalCombinations) {
-      tipo = "contradiccion";
+      tipo = "contradicción";
     } else {
-      tipo = "contingencia";
+      tipo = "Contingencia";
     }
   }
 
@@ -209,7 +209,6 @@ class TruthTable {
           this.variables.add(token);
         }
       } else if (token == ")") {
-        print("1 pila $opStack");
         if (opStack.isEmpty) {
           errorMessage = "Paréntesis incompletos";
           return null;
@@ -218,7 +217,6 @@ class TruthTable {
 
         while (topToken != "(") {
           postfixList.add(topToken);
-          print("2 pila $opStack");
 
           if (opStack.isEmpty) {
             errorMessage = "Error de paréntesis";
@@ -252,7 +250,6 @@ class TruthTable {
 
     for (String c in this.postfix.split("")) {
       if (isOperator(c)) {
-        print("$c es un operador");
         if (pila.isEmpty) {
           if (required2Operators(c)) {
             this.errorMessage = "Error, el operador $c requiere 2 operandos";
@@ -278,7 +275,6 @@ class TruthTable {
         pila.add(c);
       }
     }
-    print("pila: $pila");
     if (pila.length == 1) {
       return true;
     } else {

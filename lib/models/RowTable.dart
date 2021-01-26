@@ -1,6 +1,7 @@
 class RowTable {
   String combination;
   String result;
+  int index;
 
-  RowTable({this.combination, this.result});
+  RowTable({this.index, this.combination, this.result});
 }
