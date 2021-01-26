@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
+import 'package:tablas_de_verdad/helpers/alerts.dart';
 import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/models/operators.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
@@ -29,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-     appProvider = Provider.of<AppProvider>(context);
+    appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       body: _body(),
     );
@@ -223,12 +224,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void handleGoResult() {
-
     //TODO: Check if input is correctly formed
 
     TruthTable t = new TruthTable(appProvider.input);
-    t.convertInfixToPostix();
+    bool isValid = t.convertInfixToPostix();
 
+    if (!isValid) {
+      showSnackBarMessage(context, t.errorMessage);
+      return;
+    }
+
+    isValid = t.checkIfIsCorrectlyFormed();
+
+    if (!isValid) {
+      showSnackBarMessage(context, t.errorMessage);
+      return;
+    }
 
     Navigator.push(
       context,

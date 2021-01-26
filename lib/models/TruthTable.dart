@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:tablas_de_verdad/models/operators.dart';
 import 'package:tablas_de_verdad/models/RowTable.dart';
 
-
 class TruthTable {
   String infix;
   String postfix;
@@ -44,14 +43,15 @@ class TruthTable {
   String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   String tipo = "";
 
-  void convertInfixToPostix(){
+  bool convertInfixToPostix() {
     this.postfix = this.infixToPostfix(this.infix);
+    if(this.postfix == null){
+      return false;
+    }
+    return true;
   }
 
-
-
   void calculate() {
-    
     table = [];
     counter1s = 0;
     counters0s = 0;
@@ -64,22 +64,19 @@ class TruthTable {
       combination = formatCombination(combination, sizeOfCombinations);
       String combinationInPostfix = varSubstitutions(postfix, combination);
       int result = evaluation(combinationInPostfix);
-      table.add(new RowTable(combination: combination, result: "$result" ));
-    
-      if(result == 1){
+      table.add(new RowTable(combination: combination, result: "$result"));
+
+      if (result == 1) {
         counter1s++;
-      }
-      else{
+      } else {
         counters0s++;
       }
     }
-    if(counter1s == totalCombinations){
+    if (counter1s == totalCombinations) {
       tipo = "tautologia";
-    }
-    else if(counters0s == totalCombinations){
+    } else if (counters0s == totalCombinations) {
       tipo = "contradiccion";
-    }
-    else {
+    } else {
       tipo = "contingencia";
     }
   }
@@ -194,7 +191,6 @@ class TruthTable {
     return 0;
   }
 
-
   String varSubstitutions(String postfix, String combination) {
     for (int i = 0; i < variables.length; i++) {
       postfix = postfix.replaceAll(variables[i], combination[i]);
@@ -213,10 +209,22 @@ class TruthTable {
           this.variables.add(token);
         }
       } else if (token == ")") {
+        print("1 pila $opStack");
+        if (opStack.isEmpty) {
+          errorMessage = "Paréntesis incompletos";
+          return null;
+        }
         String topToken = opStack.removeLast();
 
         while (topToken != "(") {
           postfixList.add(topToken);
+          print("2 pila $opStack");
+
+          if (opStack.isEmpty) {
+            errorMessage = "Error de paréntesis";
+            return null;
+          }
+
           topToken = opStack.removeLast();
         }
       } else {
@@ -229,66 +237,63 @@ class TruthTable {
     }
 
     while (opStack.isNotEmpty) {
-      postfixList.add(opStack.removeLast());
+      String last = opStack.removeLast();
+      if(last == "("){
+        errorMessage = "Error de sintaxis, falta falta cerrar el paréntesis abierto";
+        return null;
+      }
+      postfixList.add(last);
     }
     return postfixList.join();
   }
 
-  bool checkIfIsCorrectlyFormed(){
+  bool checkIfIsCorrectlyFormed() {
     List<String> pila = [];
-    for(String c in this.postfix.split("")){
-      if(isOpertator(c)){
-        if(pila.isEmpty){
-          if(required2Operators(c)){
-            this.errorMessage = "El operador $c requiere 1 operandos";
-          }
-          else{
-            this.errorMessage = "El operador $c requiere 1 operando";
+
+    for (String c in this.postfix.split("")) {
+      if (isOperator(c)) {
+        print("$c es un operador");
+        if (pila.isEmpty) {
+          if (required2Operators(c)) {
+            this.errorMessage = "Error, el operador $c requiere 2 operandos";
+          } else {
+            this.errorMessage = "Error, el operador $c requiere 1 operando";
           }
           return false;
         }
-        int a = int.parse(pila.removeLast());
+        pila.removeLast();
         String resultado;
-        if(required2Operators(c)){
-          if(pila.isEmpty){
-
-            if(pila.isEmpty){
-              this.errorMessage = "El operador $c necesita 2 operandos";
-              return false;
-            }
-            pila.removeLast(); 
-            resultado = "0";
+        if (required2Operators(c)) {
+          if (pila.isEmpty) {
+            this.errorMessage = "Error, el operador $c necesita 2 operandos";
+            return false;
           }
-        }
-        else if(notOpers.contains(c)){
+          pila.removeLast();
+          resultado = "0";
+        } else if (notOpers.contains(c)) {
           resultado = "9";
         }
         pila.add(resultado);
-      }
-      else{
+      } else {
         pila.add(c);
       }
-
     }
-
-    if(pila.length == 1){
+    print("pila: $pila");
+    if (pila.length == 1) {
       return true;
-    }
-    else{
-      this.errorMessage = "La proposición lógica no está bien formada";
+    } else {
+      this.errorMessage = "Error de sintaxis, la proposición lógica no está bien formada";
       return false;
     }
   }
 
-  bool required2Operators(String operator){
-    if(this.notOpers.contains(operator)) return false;
+  bool required2Operators(String operator) {
+    if (this.notOpers.contains(operator)) return false;
     return true;
   }
 
-  bool isOpertator(String operator){
-    if(this.alphabet.contains(operator)) return false;
+  bool isOperator(String val) {
+    if ("$alphabet()[]{}".contains(val)) return false;
     return true;
   }
-
 }
-

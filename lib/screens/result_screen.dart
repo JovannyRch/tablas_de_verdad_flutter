@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tablas_de_verdad/models/TruthTable.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({Key key}) : super(key: key);
+  final TruthTable table;
+
+  ResultScreen({this.table});
 
   @override
   Widget build(BuildContext context) {
