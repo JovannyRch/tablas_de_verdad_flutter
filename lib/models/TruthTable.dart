@@ -11,10 +11,10 @@ class TruthTable {
   int counters0s = 0;
   List<String> variables = [];
   List<RowTable> table = [];
-  List<String> notOpers = [Operators.NOT, Operators.NOT2, Operators.NOT3];
-  List<String> andOpers = [Operators.AND, Operators.AND2];
-  List<String> orOpers = [Operators.OR, Operators.OR2];
-  List<String> xorOpers = [Operators.XOR, Operators.XOR2];
+  List<String> notOpers = [Operators.NOT.value, Operators.NOT2.value, Operators.NOT3.value];
+  List<String> andOpers = [Operators.AND.value, Operators.AND2.value];
+  List<String> orOpers = [Operators.OR.value, Operators.OR2.value];
+  List<String> xorOpers = [Operators.XOR.value, Operators.XOR2.value];
   String errorMessage = "";
 
   Map<String, int> priorities = {
@@ -75,7 +75,7 @@ class TruthTable {
     if (counter1s == totalCombinations) {
       tipo = "Tautología";
     } else if (counters0s == totalCombinations) {
-      tipo = "contradicción";
+      tipo = "Contradicción";
     } else {
       tipo = "Contingencia";
     }
@@ -105,27 +105,27 @@ class TruthTable {
             resultado = or(b, a);
           } else if (this.andOpers.contains(c)) {
             resultado = and(b, a);
-          } else if (c == Operators.CODICIONAL) {
+          } else if (c == Operators.CODICIONAL.value) {
             resultado = condicional(b, a);
-          } else if (c == Operators.BICODICIONAL) {
+          } else if (c == Operators.BICODICIONAL.value) {
             resultado = bicondicional(b, a);
-          } else if (c == Operators.NOR) {
+          } else if (c == Operators.NOR.value) {
             resultado = nor(b, a);
-          } else if (c == Operators.NAND) {
+          } else if (c == Operators.NAND.value) {
             resultado = nand(b, a);
           } else if (this.xorOpers.contains(c)) {
             resultado = xor(b, a);
-          } else if (c == Operators.ANTICODICIONAL) {
+          } else if (c == Operators.ANTICODICIONAL.value) {
             resultado = replicador(b, a);
-          } else if (c == Operators.NOT_CONDITIONAL) {
+          } else if (c == Operators.NOT_CONDITIONAL.value) {
             resultado = not(condicional(b, a));
-          } else if (c == Operators.NOT_CONDITIONAL_INVERSE) {
+          } else if (c == Operators.NOT_CONDITIONAL_INVERSE.value) {
             resultado = not(replicador(b, a));
-          } else if (c == Operators.NOT_BICONDITIONAL) {
+          } else if (c == Operators.NOT_BICONDITIONAL.value) {
             resultado = not(bicondicional(b, a));
-          } else if (c == Operators.TAUTOLOGY) {
+          } else if (c == Operators.TAUTOLOGY.value) {
             resultado = 1;
-          } else if (c == Operators.CONTRADICTION) {
+          } else if (c == Operators.CONTRADICTION.value) {
             resultado = 0;
           }
         }

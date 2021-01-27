@@ -16,6 +16,9 @@ class ResultScreen extends StatefulWidget {
 
 class _ResultScreenState extends State<ResultScreen> {
   bool isLoading = false;
+  double boxWidth = 60.0;
+  Size size;
+
   AppProvider appProvider;
 
   @override
@@ -30,6 +33,15 @@ class _ResultScreenState extends State<ResultScreen> {
     setIsLoading(false);
   }
 
+  void calculateBoxWidth(){
+   if(widget.table.variables.length > 6){
+     boxWidth = 30.0;
+   }else{
+        boxWidth = size.width/(widget.table.variables.length??1);
+   }
+
+  }
+
   void setIsLoading(bool val) {
     setState(() {
       isLoading = val;
@@ -38,6 +50,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
     appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -104,11 +117,14 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   Widget _table() {
-    return Column(
-      children: [
-        _header(widget.table.variables, "Resultado"),
-        ...widget.table.table.map((e) => _rowTable(e)).toList(),
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+          child: Column(
+        children: [
+          _header(widget.table.variables, "Resultado"),
+          ...widget.table.table.map((e) => _rowTable(e)).toList(),
+        ],
+      ),
     );
   }
 
@@ -118,11 +134,12 @@ class _ResultScreenState extends State<ResultScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+        /*   _indexLabel("${row.index}"), */
           ...row.combination
               .split("")
               .map((e) => _box(showValue(e), isFocus: isFocus))
               .toList(),
-          _box(showValue(row.result), isFocus: isFocus),
+          _box(showValue(row.result), isFocus: isFocus, isResultado: true),
         ],
       ),
     );
@@ -151,18 +168,24 @@ class _ResultScreenState extends State<ResultScreen> {
     );
   }
 
-  Widget _box(String label,
-      {double fontSize = 17.0, bool isHeader = false, bool isFocus = false}) {
+  Widget _indexLabel(String index){
     return Container(
-      width: 110.0,
+      child: Text(index),
+    );
+  }
+
+  Widget _box(String label,
+      {double fontSize = 17.0, bool isHeader = false, bool isFocus = false, bool isResultado = false}) {
+    return Container(
+      width: boxWidth,
       height: 40.0,
       padding: EdgeInsets.all(2.0),
       decoration: BoxDecoration(
           color: isHeader
               ? kDisableColor
               : !isFocus
-                  ? Colors.grey.shade200
-                  : Colors.transparent,
+                  ? !isResultado? Colors.grey.shade200: kMainColor.withOpacity(0.25)
+                  : !isResultado?Colors.transparent: kMainColor.withOpacity(0.1),
           border: Border.all(color: kMainColor.withOpacity(0.15))),
       child: Center(
           child: Text(

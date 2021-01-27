@@ -70,13 +70,13 @@ class Button extends StatelessWidget {
   }
 
   String _getText() {
-
-    if(label == Operators.FALSE || label == Operators.TRUE || label == Operators.MODE){
+    if (label == Operators.FALSE.value ||
+        label == Operators.TRUE.value ||
+        label == Operators.MODE.value) {
       return label;
     }
 
-
-    if (label == Operators.ABC) {
+    if (label == Operators.ABC.value) {
       if (!appProvider.isUppercase) {
         return label.toUpperCase();
       } else {
@@ -92,11 +92,10 @@ class Button extends StatelessWidget {
   }
 
   Color getColorText() {
-    switch (label) {
-      case Operators.EQUAL:
-      case Operators.FALSE:
-      case Operators.TRUE:
-        return Colors.white;
+    if (label == Operators.EQUAL.value ||
+        label == Operators.FALSE.value ||
+        label == Operators.TRUE.value) {
+      return Colors.white;
     }
 
     if (isOperator) {
@@ -107,30 +106,32 @@ class Button extends StatelessWidget {
   }
 
   double getFontSize() {
-    switch (label) {
-      case Operators.MODE:
-      case Operators.ABC:
-        return 14.0;
-      case Operators.FALSE:
-      case Operators.TRUE:
-      case Operators.TRUE:
-        return 10.0;
-      default:
-        return 25.0;
+    if (label == Operators.MODE.value || label == Operators.ABC.value) {
+      return 14.0;
     }
+
+    if (label == Operators.FALSE.value || label == Operators.TRUE.value) {
+      return 10.0;
+    }
+
+    return 25.0;
   }
 
   Color _getBgColor() {
-    switch (label) {
-      case CLEAR_INPUT:
-      case REMOVE_LETTER:
-        return kSecondaryColor;
-      case Operators.EQUAL:
-        return kMainColor;
-      case Operators.TRUE:
-        return Colors.green;
-      case Operators.FALSE:
-        return Colors.red;
+    if (label == CLEAR_INPUT || label == REMOVE_LETTER) {
+      return kSecondaryColor;
+    }
+
+    if (label == Operators.EQUAL.value) {
+      return kMainColor;
+    }
+
+    if (label == Operators.TRUE.value) {
+      return Colors.green;
+    }
+
+    if (label == Operators.FALSE.value) {
+      return Colors.red;
     }
 
     if (isOperator) {

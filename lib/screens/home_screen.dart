@@ -105,18 +105,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 Button(onTap: handleClickButton, label: ")", isOperator: true),
                 Button(
                     onTap: handleClickButton,
-                    label: Operators.ABC,
+                    label: Operators.ABC.value,
                     isOperator: true),
                 Button(
                     onTap: handleClickButton, label: "MODE", isOperator: true),
               ],
             ),
-            _rowLettersWithOperator("A", "B", "C", "D", Operators.NOT),
-            _rowLettersWithOperator("E", "F", "G", "H", Operators.NOT2),
-            _rowLettersWithOperator("I", "J", "K", "L", Operators.OR),
-            _rowLettersWithOperator("M", "N", "O", "P", Operators.AND),
-            _rowLettersWithOperator("Q", "R", "S", "T", Operators.BICODICIONAL),
-            _rowLettersWithOperator("U", "V", "W", "X", Operators.CODICIONAL),
+            _rowLettersWithOperator("A", "B", "C", "D", Operators.NOT.value),
+            _rowLettersWithOperator("E", "F", "G", "H", Operators.NOT2.value),
+            _rowLettersWithOperator("I", "J", "K", "L", Operators.OR.value),
+            _rowLettersWithOperator("M", "N", "O", "P", Operators.AND.value),
+            _rowLettersWithOperator("Q", "R", "S", "T", Operators.BICODICIONAL.value),
+            _rowLettersWithOperator("U", "V", "W", "X", Operators.CODICIONAL.value),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -124,15 +124,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 Button(onTap: handleClickButton, label: "Z"),
                 Button(
                     onTap: handleClickButton,
-                    label: Operators.TRUE,
+                    label: Operators.TRUE.value,
                     isOperator: true),
                 Button(
                     onTap: handleClickButton,
-                    label: Operators.FALSE,
+                    label: Operators.FALSE.value,
                     isOperator: true),
                 Button(
                     onTap: handleClickButton,
-                    label: Operators.EQUAL,
+                    label: Operators.EQUAL.value,
                     isOperator: true),
               ],
             ),
@@ -143,27 +143,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.XOR,
+                        label: Operators.XOR.value,
                         isOperator: true,
                       ),
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.XOR2,
+                        label: Operators.XOR2.value,
                         isOperator: true,
                       ),
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.NAND,
+                        label: Operators.NAND.value,
                         isOperator: true,
                       ),
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.NOR,
+                        label: Operators.NOR.value,
                         isOperator: true,
                       ),
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.ANTICODICIONAL,
+                        label: Operators.ANTICODICIONAL.value,
                         isOperator: true,
                       ),
                     ],
@@ -175,27 +175,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.NOT_CONDITIONAL,
+                        label: Operators.NOT_CONDITIONAL.value,
                         isOperator: true,
                       ),
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.NOT_CONDITIONAL_INVERSE,
+                        label: Operators.NOT_CONDITIONAL_INVERSE.value,
                         isOperator: true,
                       ),
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.NOT_BICONDITIONAL,
+                        label: Operators.NOT_BICONDITIONAL.value,
                         isOperator: true,
                       ),
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.TAUTOLOGY,
+                        label: Operators.TAUTOLOGY.value,
                         isOperator: true,
                       ),
                       Button(
                         onTap: handleClickButton,
-                        label: Operators.CONTRADICTION,
+                        label: Operators.CONTRADICTION.value,
                         isOperator: true,
                       ),
                     ],
@@ -212,11 +212,11 @@ class _HomeScreenState extends State<HomeScreen> {
       appProvider.clearInput();
     } else if (label == REMOVE_LETTER) {
       appProvider.removerLetter();
-    } else if (label == Operators.ABC) {
+    } else if (label == Operators.ABC.value) {
       appProvider.changeCase();
-    } else if (label == Operators.EQUAL) {
+    } else if (label == Operators.EQUAL.value) {
       handleGoResult();
-    } else if (label == Operators.MODE) {
+    } else if (label == Operators.MODE.value) {
       appProvider.changeMode();
     } else {
       appProvider.addLeter(label);
