@@ -59,7 +59,7 @@ class TruthTable {
     int totalCombinations = pow(2, this.variables.length);
     int sizeOfCombinations = (totalCombinations - 1).toRadixString(2).length;
 
-    for (int i = 0; i < totalCombinations; i++) {
+    for (int i = totalCombinations -1; i >= 0; i--) {
       String combination = i.toRadixString(2);
       combination = formatCombination(combination, sizeOfCombinations);
       String combinationInPostfix = varSubstitutions(postfix, combination);

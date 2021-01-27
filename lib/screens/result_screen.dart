@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/models/RowTable.dart';
 import 'package:tablas_de_verdad/models/TruthTable.dart';
+import 'package:tablas_de_verdad/provider/AppProvider.dart';
 
 class ResultScreen extends StatefulWidget {
   final TruthTable table;
@@ -14,6 +16,7 @@ class ResultScreen extends StatefulWidget {
 
 class _ResultScreenState extends State<ResultScreen> {
   bool isLoading = false;
+  AppProvider appProvider;
 
   @override
   void initState() {
@@ -35,6 +38,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kMainColor,
@@ -116,12 +120,23 @@ class _ResultScreenState extends State<ResultScreen> {
         children: [
           ...row.combination
               .split("")
-              .map((e) => _box(e, isFocus: isFocus))
+              .map((e) => _box(showValue(e), isFocus: isFocus))
               .toList(),
-          _box(row.result, isFocus: isFocus),
+          _box(showValue(row.result), isFocus: isFocus),
         ],
       ),
     );
+  }
+
+  String showValue(String val){
+    if(!appProvider.is0sAnd1s){
+      if(val == "1"){
+        return T;
+      }
+      return F;
+    }
+    
+    return val;
   }
 
   Widget _header(List<String> variables, String label) {

@@ -4,6 +4,12 @@ class AppProvider with ChangeNotifier {
   String _input = "";
   bool _isUppercase = true;
   bool _isBasic = true;
+  bool _is0sAnd1s = false;
+
+
+  bool get is0sAnd1s {
+    return _is0sAnd1s;
+  }
 
   bool get isUppercase {
     return _isUppercase;
@@ -59,6 +65,11 @@ class AppProvider with ChangeNotifier {
 
   void changeMode() {
     _isBasic = !_isBasic;
+    notifyListeners();
+  }
+
+  void change01s(){
+    _is0sAnd1s = !_is0sAnd1s;
     notifyListeners();
   }
 }

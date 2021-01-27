@@ -8,3 +8,6 @@ const REMOVE_LETTER = "REMOVE_LETTER";
 
 
 const CHANGE_CASE = "CHANGE_CASE";
+
+const T = "T";
+const F = "F";
