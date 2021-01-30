@@ -17,6 +17,9 @@ class TruthTable {
   List<String> xorOpers = [Operators.XOR.value, Operators.XOR2.value];
   String errorMessage = "";
 
+  int index0InVariables = -1;
+  int index1InVariables = -1;
+
   Map<String, int> priorities = {
     "~": 16,
     "!": 15,
@@ -40,7 +43,7 @@ class TruthTable {
     "(": 0,
   };
 
-  String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01";
   String tipo = "";
 
   bool convertInfixToPostix() {
@@ -55,8 +58,17 @@ class TruthTable {
     table = [];
     counter1s = 0;
     counters0s = 0;
-    this.variables.sort();
-    int totalCombinations = pow(2, this.variables.length);
+    variables.sort();
+
+    if(variables.contains("0")){
+      index0InVariables = variables.indexOf("0");
+    }
+
+    if(variables.contains("1")){
+      index1InVariables = variables.indexOf("1");
+    }
+
+    int totalCombinations = pow(2, variables.length);
     int sizeOfCombinations = (totalCombinations - 1).toRadixString(2).length;
 
     for (int i = totalCombinations -1; i >= 0; i--) {
@@ -85,6 +97,16 @@ class TruthTable {
     while (combination.length < lenght) {
       combination = "0$combination";
     }
+  
+
+  if(index0InVariables != -1){
+      combination = combination.replaceRange(index0InVariables, index0InVariables+1, "0");
+    }
+
+    if(index1InVariables != -1){
+      combination = combination.replaceRange(index1InVariables, index1InVariables+1, "1");
+    }
+
     return combination;
   }
 
