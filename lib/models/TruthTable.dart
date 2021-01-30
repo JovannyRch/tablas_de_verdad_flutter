@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/models/operators.dart';
 import 'package:tablas_de_verdad/models/RowTable.dart';
 
@@ -85,11 +86,11 @@ class TruthTable {
       }
     }
     if (counter1s == totalCombinations) {
-      tipo = "Tautología";
+      tipo = TAUTOLOGY;
     } else if (counters0s == totalCombinations) {
-      tipo = "Contradicción";
+      tipo = CONTRADICTION;
     } else {
-      tipo = "Contingencia";
+      tipo = CONTINGENCY;
     }
   }
 
