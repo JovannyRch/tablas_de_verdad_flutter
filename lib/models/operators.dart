@@ -12,8 +12,8 @@ class Operators {
   static final Operator BICODICIONAL = new Operator(value: "⇔", enName: "", esName: "");
   static final Operator CODICIONAL = new Operator(value: "⇒", enName: "", esName: "");
   static final Operator ANTICODICIONAL = new Operator(value: "￩", enName: "", esName: "");
-  static final Operator TRUE = new Operator(value: "FALSE", enName: "", esName: "");
-  static final Operator FALSE = new Operator(value: "TRUE", enName: "", esName: "");
+  static final Operator TRUE = new Operator(value: "FALSE", enName: "1", esName: "1");
+  static final Operator FALSE = new Operator(value: "TRUE", enName: "1", esName: "1");
 
   static final Operator XOR = new Operator(value: "⊕", enName: "", esName: "");
   static final Operator XOR2 = new Operator(value: "⊻", enName: "", esName: "");

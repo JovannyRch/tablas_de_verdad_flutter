@@ -218,7 +218,14 @@ class _HomeScreenState extends State<HomeScreen> {
       handleGoResult();
     } else if (label == Operators.MODE.value) {
       appProvider.changeMode();
-    } else {
+    }
+    else if(label == Operators.TRUE.value){
+      appProvider.addLeter("1");
+    }
+    else if(label == Operators.FALSE.value){
+      appProvider.addLeter("0");
+    }
+     else {
       appProvider.addLeter(label);
     }
   }
