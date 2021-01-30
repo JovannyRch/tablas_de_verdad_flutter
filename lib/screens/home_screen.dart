@@ -226,8 +226,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void handleGoResult() {
     //TODO: Check if input is correctly formed
 
+    if(appProvider.input.isEmpty){
+      showSnackBarMessage(context, EMPTY_INPUT_MESSAGE);
+      return;
+    }  
+    
     TruthTable t = new TruthTable(appProvider.input);
     bool isValid = t.convertInfixToPostix();
+
 
     if (!isValid) {
       showSnackBarMessage(context, t.errorMessage);

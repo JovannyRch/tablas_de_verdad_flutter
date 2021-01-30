@@ -11,3 +11,5 @@ const CHANGE_CASE = "CHANGE_CASE";
 
 const T = "T";
 const F = "F";
+
+const EMPTY_INPUT_MESSAGE = "Entrada vacía";
