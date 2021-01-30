@@ -5,6 +5,7 @@ import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/models/RowTable.dart';
 import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
+import 'package:tablas_de_verdad/screens/step_by_step_screen.dart';
 
 class ResultScreen extends StatefulWidget {
   final TruthTable table;
@@ -54,16 +55,36 @@ class _ResultScreenState extends State<ResultScreen> {
     appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kMainColor,
-        title: Text(RESULT_LABEL),
+        iconTheme: IconThemeData(
+          color: kMainColor, //change your color here
+        ),
+        title: Text(
+          RESULT_LABEL,
+          style: TextStyle(
+            color: kMainColor,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        actions: [],
+        elevation: 0,
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: handleStepByStepClickButton,
         icon: FaIcon(FontAwesomeIcons.tasks),
         label: Text(STEP_BY_STEP_LABEL),
         backgroundColor: kMainColor,
       ),
       body: _body(),
+    );
+  }
+
+  void handleStepByStepClickButton() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => StepByStepScreen(
+                table: widget.table,
+              )),
     );
   }
 
@@ -73,6 +94,7 @@ class _ResultScreenState extends State<ResultScreen> {
     return Container(
       width: double.infinity,
       child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
