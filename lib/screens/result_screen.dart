@@ -213,11 +213,13 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   Widget _table() {
-    return TableWidget
-    (title: FINAL_TABLE_LABEL,table: widget.table,);
+    return TableWidget(
+      title: FINAL_TABLE_LABEL,
+      table: widget.table,
+      columsKeys: [
+        ...widget.table.variables,
+        widget.table.steps.last.toString(),
+      ],
+    );
   }
-
-
-
-  
 }

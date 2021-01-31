@@ -26,9 +26,11 @@ class TruthTable {
 
   int index0InVariables = -1;
   int index1InVariables = -1;
-  List<Step> steps = [];
+  List<StepProcess> steps = [];
   Map<String,String> opersHistory;
   int keyStepGenerator = 0;
+  Map<String,List<String>> columns  = {};
+  int totalRows = 0;
 
 
 
@@ -67,11 +69,21 @@ class TruthTable {
     return true;
   }
 
+  void createColumnsForVariables(){
+    for(int i = 0; i < variables.length;i++){
+      columns[variables[i]] = [];
+    }
+  }
+
   void calculate() {
     table = [];
     counter1s = 0;
     counters0s = 0;
     variables.sort();
+    createColumnsForVariables();
+    StepProcess.currentIndex = variables.length-1;
+    //Get steps
+    getSteps(postfix);
 
     if (variables.contains("0")) {
       index0InVariables = variables.indexOf("0");
@@ -83,7 +95,7 @@ class TruthTable {
 
     int totalCombinations = pow(2, variables.length);
     int sizeOfCombinations = (totalCombinations - 1).toRadixString(2).length;
-
+    totalRows = totalCombinations;
     for (int i = totalCombinations - 1; i >= 0; i--) {
       String combination = i.toRadixString(2);
       combination = formatCombination(combination, sizeOfCombinations);
@@ -105,6 +117,7 @@ class TruthTable {
     } else {
       tipo = CONTINGENCY;
     }
+   /*   _printColumns(); */
   }
 
   String formatCombination(String combination, int lenght) {
@@ -127,6 +140,9 @@ class TruthTable {
 
   int evaluation(combination) {
     List<String> stack = [];
+    List<String> stepsKeys = columns.keys.toList().sublist(variables.length);
+    
+    int counterSteps = 0;
     for (String c in combination.split("")) {
       if ("01".contains(c)) {
         stack.add(c);
@@ -166,11 +182,26 @@ class TruthTable {
             resultado = 0;
           }
         }
+        
         stack.add("$resultado");
+        if(columns.containsKey(stepsKeys[counterSteps])){
+          columns[stepsKeys[counterSteps]].add("$resultado");
+          counterSteps++;
+        }
+        
       }
+      
     }
 
     return int.parse(stack.last);
+  }
+
+  void _printColumns(){
+    print("Keys: ");
+    print(columns.keys);
+    for(String k in columns.keys){
+      print(columns[k]);
+    }
   }
 
   int replicador(int a, int b) {
@@ -230,7 +261,10 @@ class TruthTable {
 
   String varSubstitutions(String postfix, String combination) {
     for (int i = 0; i < variables.length; i++) {
-      postfix = postfix.replaceAll(variables[i], combination[i]);
+      String val = combination[i];
+      String variable = variables[i];
+      columns[variable].add(val);
+      postfix = postfix.replaceAll(variable,val);
     }
     return postfix;
   }
@@ -359,16 +393,16 @@ class TruthTable {
   }
 
   
-  bool _checkCanAddStep(Step step){
-    print("Check if can add: $step");
-    for(Step s in steps){
+  bool _checkCanAddStep(StepProcess step){
+    for(StepProcess s in steps){
       if(s.toString() == step.toString()) return false;
     }
     return true;
   }
 
-  void _addStep(Step step){
+  void _addStep(StepProcess step){
     if(_checkCanAddStep(step)){
+      columns[step.toString()] = [];
       steps.add(step);
     }
   }
@@ -376,7 +410,6 @@ class TruthTable {
   void getSteps(String postfija) {
     List<String> stack = [];
     steps = [];
-    print("Postfija $postfija");
     for (String c in postfija.split("")) {
       Operator currentOper;
       if (alphabet.contains(c)) {
@@ -384,10 +417,10 @@ class TruthTable {
       } else {
         String a, b;
         a = stack.removeLast();
-        Step s;
+        StepProcess s;
         if (this.notOpers.contains(c)) {
           currentOper = getCurrentOperFromString(c);
-          s = new Step(operator: currentOper, variable1: a, isSingleVariable: true);
+          s = new StepProcess(operator: currentOper, variable1: a, isSingleVariable: true);
           
         } else {
           b = stack.removeLast();
@@ -418,7 +451,7 @@ class TruthTable {
           } else if (c == Operators.CONTRADICTION.value) {
             currentOper = Operators.CONTRADICTION;
           }
-          s = new Step(operator: currentOper, variable1: b, variable2: a);
+          s = new StepProcess(operator: currentOper, variable1: b, variable2: a);
          
         }
          _addStep(s);

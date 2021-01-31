@@ -25,3 +25,4 @@ const EXPRESSION_LABEL = "Expresión lógica";
 const EVALUATION_LABEL = "Evaluación";
 const FINAL_TABLE_LABEL = "Tabla final";
 const STEP_BY_STEP_LABEL = "Paso a paso";
+const STEP_LABEL = "Paso";

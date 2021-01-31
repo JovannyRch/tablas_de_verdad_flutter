@@ -8,12 +8,14 @@ import 'package:tablas_de_verdad/provider/AppProvider.dart';
 class TableWidget extends StatelessWidget {
   final String title;
   final TruthTable table;
-  TableWidget({this.title, this.table});
+  final List<String> columsKeys;
+  TableWidget({@required this.title,@required this.table, @required this.columsKeys});
 
   AppProvider appProvider;
 
   @override
   Widget build(BuildContext context) {
+    print(columsKeys);
     appProvider = Provider.of<AppProvider>(context);
     return _table();
   }
