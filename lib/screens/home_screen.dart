@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/helpers/alerts.dart';
+import 'package:tablas_de_verdad/models/Operator.dart';
 import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/models/operators.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
@@ -51,30 +52,55 @@ class _HomeScreenState extends State<HomeScreen> {
     return Expanded(
       child: Container(
         padding: EdgeInsets.all(15.0),
+        margin: EdgeInsets.symmetric(horizontal: 5.0),
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.grey.shade100,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0)),
             boxShadow: [
               BoxShadow(
-                offset: Offset(-4, -4),
+                offset: Offset(-1, -1),
                 color: Colors.black12,
-                blurRadius: 5.0,
+                blurRadius: 1.0,
               ),
             ]),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             appProvider.isBasic
-                ? Container()
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: 40.0,
+                        height: 10.0,
+                      ),
+                      Container(
+                        width: 40.0,
+                        height: 10.0,
+                      ),
+                      Container(
+                        width: 40.0,
+                        height: 10.0,
+                      ),
+                      Container(
+                        width: 40.0,
+                        height: 10.0,
+                      ),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.MODE.value,
+                        isOperator: true,
+                        icon: appProvider.isBasic
+                            ? FontAwesomeIcons.expandAlt
+                            : FontAwesomeIcons.compressAlt,
+                      ),
+                    ],
+                  )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Button(
-                          icon: FontAwesomeIcons.trash,
-                          onTap: handleClickButton,
-                          label: CLEAR_INPUT),
                       Button(
                           onTap: handleClickButton,
                           label: "[",
@@ -91,11 +117,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           onTap: handleClickButton,
                           label: "}",
                           isOperator: true),
+                      Button(
+                        onTap: handleClickButton,
+                        label: Operators.MODE.value,
+                        isOperator: true,
+                        icon: appProvider.isBasic
+                            ? FontAwesomeIcons.expandAlt
+                            : FontAwesomeIcons.compressAlt,
+                      ),
                     ],
                   ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                Button(
+                  icon: FontAwesomeIcons.trash,
+                  onTap: handleClickButton,
+                  label: CLEAR_INPUT,
+                ),
                 Button(
                   icon: FontAwesomeIcons.backspace,
                   onTap: handleClickButton,
@@ -107,16 +146,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: handleClickButton,
                     label: Operators.ABC.value,
                     isOperator: true),
-                Button(
-                    onTap: handleClickButton, label: "MODE", isOperator: true),
               ],
             ),
             _rowLettersWithOperator("A", "B", "C", "D", Operators.NOT.value),
             _rowLettersWithOperator("E", "F", "G", "H", Operators.NOT2.value),
             _rowLettersWithOperator("I", "J", "K", "L", Operators.OR.value),
             _rowLettersWithOperator("M", "N", "O", "P", Operators.AND.value),
-            _rowLettersWithOperator("Q", "R", "S", "T", Operators.BICODICIONAL.value),
-            _rowLettersWithOperator("U", "V", "W", "X", Operators.CODICIONAL.value),
+            _rowLettersWithOperator(
+                "Q", "R", "S", "T", Operators.BICODICIONAL.value),
+            _rowLettersWithOperator(
+                "U", "V", "W", "X", Operators.CODICIONAL.value),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -218,14 +257,11 @@ class _HomeScreenState extends State<HomeScreen> {
       handleGoResult();
     } else if (label == Operators.MODE.value) {
       appProvider.changeMode();
-    }
-    else if(label == Operators.TRUE.value){
+    } else if (label == Operators.TRUE.value) {
       appProvider.addLeter("1");
-    }
-    else if(label == Operators.FALSE.value){
+    } else if (label == Operators.FALSE.value) {
       appProvider.addLeter("0");
-    }
-     else {
+    } else {
       appProvider.addLeter(label);
     }
   }
@@ -233,14 +269,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void handleGoResult() {
     //TODO: Check if input is correctly formed
 
-    if(appProvider.input.isEmpty){
+    if (appProvider.input.isEmpty) {
       showSnackBarMessage(context, EMPTY_INPUT_MESSAGE);
       return;
-    }  
-    
+    }
+
     TruthTable t = new TruthTable(appProvider.input);
     bool isValid = t.convertInfixToPostix();
-
 
     if (!isValid) {
       showSnackBarMessage(context, t.errorMessage);
@@ -256,7 +291,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ResultScreen(table: t,)),
+      MaterialPageRoute(
+          builder: (context) => ResultScreen(
+                table: t,
+              )),
     );
   }
 

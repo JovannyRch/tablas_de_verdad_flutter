@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
 
 class Display extends StatelessWidget {
@@ -19,6 +20,7 @@ class Display extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.only(bottom: 10.0, right: 20.0),
       decoration: BoxDecoration(
+        color: Colors.white,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,

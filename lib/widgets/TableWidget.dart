@@ -9,13 +9,17 @@ class TableWidget extends StatelessWidget {
   final String title;
   final TruthTable table;
   final List<String> columsKeys;
-  TableWidget({@required this.title,@required this.table, @required this.columsKeys});
+  final String resultColumnKey;
+  TableWidget(
+      {@required this.title,
+      @required this.table,
+      @required this.columsKeys,
+      @required this.resultColumnKey});
 
   AppProvider appProvider;
 
   @override
   Widget build(BuildContext context) {
-    print(columsKeys);
     appProvider = Provider.of<AppProvider>(context);
     return _table();
   }
@@ -28,12 +32,12 @@ class TableWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          title.isNotEmpty?Text(
             title,
             style: TextStyle(
               color: kLabelColor,
             ),
-          ),
+          ):Container(),
           SizedBox(height: 10),
           Container(
             width: double.infinity,
@@ -44,8 +48,8 @@ class TableWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _header(table.variables, RESULT_LABEL),
-                    ...table.table.map((e) => _rowTable(e)).toList(),
+                    _header(columsKeys, RESULT_LABEL),
+                    ...renderRows(),
                   ],
                 ),
               ),
@@ -56,7 +60,20 @@ class TableWidget extends StatelessWidget {
     );
   }
 
-  
+  List<Widget> renderRows() {
+    List<Widget> rows = [];
+    for (int i = 0; i < table.totalRows; i++) {
+      String combination = "";
+      for (int j = 0; j < columsKeys.length; j++) {
+        combination += table.columns[columsKeys[j]][i];
+      }
+      String result = table.columns[resultColumnKey][i];
+      rows.add(
+          _rowTable(new RowTable(index: i, combination: combination, result: result)));
+    }
+    return rows;
+  }
+
   Widget _rowTable(RowTable row) {
     bool isFocus = row.index % 2 == 0;
     return Container(

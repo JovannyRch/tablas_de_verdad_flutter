@@ -218,8 +218,8 @@ class _ResultScreenState extends State<ResultScreen> {
       table: widget.table,
       columsKeys: [
         ...widget.table.variables,
-        widget.table.steps.last.toString(),
       ],
+      resultColumnKey: widget.table.steps.last.toString(),
     );
   }
 }

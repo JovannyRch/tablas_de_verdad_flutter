@@ -13,13 +13,7 @@ class StepByStepScreen extends StatefulWidget {
 }
 
 class _StepByStepScreenState extends State<StepByStepScreen> {
-  bool _isLoading = false;
-
-  void setIsLoading(bool val) {
-    setState(() {
-      _isLoading = val;
-    });
-  }
+ 
 
   @override
   void initState() {
@@ -48,9 +42,7 @@ class _StepByStepScreenState extends State<StepByStepScreen> {
   }
 
   Widget _body() {
-    if (_isLoading) {
-      return _renderLoading();
-    }
+   
 
     return Container(
       padding: EdgeInsets.all(10.0),
@@ -59,8 +51,7 @@ class _StepByStepScreenState extends State<StepByStepScreen> {
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
-
-            ...widget.table.steps.map((s) => StepWidget(step: s)).toList()
+            ...widget.table.steps.map((s) => StepWidget(step: s, table: widget.table,)).toList()
           ],
         ),
       ),

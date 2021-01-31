@@ -8,12 +8,11 @@ class StepProcess {
   bool isSingleVariable;
   int index;
   static int currentIndex = 0;
-  
-  TruthTable table;
+  static int labelIndex = 0;
 
   StepProcess({this.variable1, this.variable2, this.operator, this.isSingleVariable = false}){
-    index = ++currentIndex;
-    table = new TruthTable(this.toString());
+    index = ++labelIndex;
+    currentIndex++;
   }
 
   @override

@@ -82,6 +82,7 @@ class TruthTable {
     variables.sort();
     createColumnsForVariables();
     StepProcess.currentIndex = variables.length-1;
+    StepProcess.labelIndex = 0;
     //Get steps
     getSteps(postfix);
 
@@ -388,9 +389,6 @@ class TruthTable {
 
   }
 
-  int get nextKey {
-    return ++keyStepGenerator;
-  }
 
   
   bool _checkCanAddStep(StepProcess step){

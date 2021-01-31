@@ -56,7 +56,7 @@ class Button extends StatelessWidget {
       return FaIcon(
         icon,
         size: 18.0,
-        color: kMainColor,
+        color: label == Operators.MODE.value? Colors.white:kMainColor,
       );
     }
     return Text(
@@ -97,7 +97,6 @@ class Button extends StatelessWidget {
         label == Operators.TRUE.value) {
       return Colors.white;
     }
-
     if (isOperator) {
       return kMainColor;
     }
@@ -134,9 +133,16 @@ class Button extends StatelessWidget {
       return Colors.red;
     }
 
+    if(label == Operators.MODE.value){
+      return kMainColor; 
+    }
+
     if (isOperator) {
       return Colors.white;
     }
+
+    
+    
 
     return Colors.white;
   }
