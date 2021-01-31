@@ -358,26 +358,40 @@ class TruthTable {
     return ++keyStepGenerator;
   }
 
+  
+  bool _checkCanAddStep(Step step){
+    print("Check if can add: $step");
+    for(Step s in steps){
+      if(s.toString() == step.toString()) return false;
+    }
+    return true;
+  }
+
+  void _addStep(Step step){
+    if(_checkCanAddStep(step)){
+      steps.add(step);
+    }
+  }
+
   void getSteps(String postfija) {
     List<String> stack = [];
+    steps = [];
     print("Postfija $postfija");
     for (String c in postfija.split("")) {
-      print("$c");
       Operator currentOper;
       if (alphabet.contains(c)) {
         stack.add(c);
       } else {
         String a, b;
         a = stack.removeLast();
+        Step s;
         if (this.notOpers.contains(c)) {
           currentOper = getCurrentOperFromString(c);
-          Step s = new Step(operator: currentOper, variable1: a, isSingleVariable: true);
-          steps.add(s);
-          stack.add(s.toString());
+          s = new Step(operator: currentOper, variable1: a, isSingleVariable: true);
+          
         } else {
           b = stack.removeLast();
           if (this.orOpers.contains(c)) {
-          
             currentOper = getCurrentOperFromString(c);
           } else if (this.andOpers.contains(c)) {
             currentOper = getCurrentOperFromString(c);
@@ -404,15 +418,11 @@ class TruthTable {
           } else if (c == Operators.CONTRADICTION.value) {
             currentOper = Operators.CONTRADICTION;
           }
-          Step s = new Step(operator: currentOper, variable1: b, variable2: a);
-          steps.add(s);
-          if(!opersHistory.containsKey(s)){
-            int stepKey = nextKey;
-            opersHistory[s.toString()] = "$stepKey";
-          }
-          stack.add(s.toString());
-          print("Added: ${steps.last}");
+          s = new Step(operator: currentOper, variable1: b, variable2: a);
+         
         }
+         _addStep(s);
+         stack.add(s.toString());
       }
     }
   }

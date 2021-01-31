@@ -10,8 +10,8 @@ class Step {
   @override
   String toString() {
     if(this.isSingleVariable){
-      return " ${operator.value}$variable1 ";
+      return "${operator.value}$variable1";
     }
-    return "$variable1 ${operator.value} $variable2";
+    return "$variable1${operator.value}$variable2";
   }
 }
