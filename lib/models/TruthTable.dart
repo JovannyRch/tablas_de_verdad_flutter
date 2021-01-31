@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:tablas_de_verdad/const/conts.dart';
+import 'package:tablas_de_verdad/models/Operator.dart';
+import 'package:tablas_de_verdad/models/Step.dart';
 import 'package:tablas_de_verdad/models/operators.dart';
 import 'package:tablas_de_verdad/models/RowTable.dart';
 
@@ -12,7 +14,11 @@ class TruthTable {
   int counters0s = 0;
   List<String> variables = [];
   List<RowTable> table = [];
-  List<String> notOpers = [Operators.NOT.value, Operators.NOT2.value, Operators.NOT3.value];
+  List<String> notOpers = [
+    Operators.NOT.value,
+    Operators.NOT2.value,
+    Operators.NOT3.value
+  ];
   List<String> andOpers = [Operators.AND.value, Operators.AND2.value];
   List<String> orOpers = [Operators.OR.value, Operators.OR2.value];
   List<String> xorOpers = [Operators.XOR.value, Operators.XOR2.value];
@@ -20,6 +26,12 @@ class TruthTable {
 
   int index0InVariables = -1;
   int index1InVariables = -1;
+  List<Step> steps = [];
+  Map<String,String> opersHistory;
+  int keyStepGenerator = 0;
+
+
+
 
   Map<String, int> priorities = {
     "~": 16,
@@ -49,7 +61,7 @@ class TruthTable {
 
   bool convertInfixToPostix() {
     this.postfix = this.infixToPostfix(this.infix);
-    if(this.postfix == null){
+    if (this.postfix == null) {
       return false;
     }
     return true;
@@ -61,23 +73,24 @@ class TruthTable {
     counters0s = 0;
     variables.sort();
 
-    if(variables.contains("0")){
+    if (variables.contains("0")) {
       index0InVariables = variables.indexOf("0");
     }
 
-    if(variables.contains("1")){
+    if (variables.contains("1")) {
       index1InVariables = variables.indexOf("1");
     }
 
     int totalCombinations = pow(2, variables.length);
     int sizeOfCombinations = (totalCombinations - 1).toRadixString(2).length;
 
-    for (int i = totalCombinations -1; i >= 0; i--) {
+    for (int i = totalCombinations - 1; i >= 0; i--) {
       String combination = i.toRadixString(2);
       combination = formatCombination(combination, sizeOfCombinations);
       String combinationInPostfix = varSubstitutions(postfix, combination);
       int result = evaluation(combinationInPostfix);
-      table.add(new RowTable(index: i,combination: combination, result: "$result"));
+      table.add(
+          new RowTable(index: i, combination: combination, result: "$result"));
 
       if (result == 1) {
         counter1s++;
@@ -98,14 +111,15 @@ class TruthTable {
     while (combination.length < lenght) {
       combination = "0$combination";
     }
-  
 
-  if(index0InVariables != -1){
-      combination = combination.replaceRange(index0InVariables, index0InVariables+1, "0");
+    if (index0InVariables != -1) {
+      combination = combination.replaceRange(
+          index0InVariables, index0InVariables + 1, "0");
     }
 
-    if(index1InVariables != -1){
-      combination = combination.replaceRange(index1InVariables, index1InVariables+1, "1");
+    if (index1InVariables != -1) {
+      combination = combination.replaceRange(
+          index1InVariables, index1InVariables + 1, "1");
     }
 
     return combination;
@@ -259,8 +273,9 @@ class TruthTable {
 
     while (opStack.isNotEmpty) {
       String last = opStack.removeLast();
-      if(last == "("){
-        errorMessage = "Error de sintaxis, falta falta cerrar el paréntesis abierto";
+      if (last == "(") {
+        errorMessage =
+            "Error de sintaxis, falta falta cerrar el paréntesis abierto";
         return null;
       }
       postfixList.add(last);
@@ -301,7 +316,8 @@ class TruthTable {
     if (pila.length == 1) {
       return true;
     } else {
-      this.errorMessage = "Error de sintaxis, la proposición lógica no está bien formada";
+      this.errorMessage =
+          "Error de sintaxis, la proposición lógica no está bien formada";
       return false;
     }
   }
@@ -314,5 +330,90 @@ class TruthTable {
   bool isOperator(String val) {
     if ("$alphabet()[]{}".contains(val)) return false;
     return true;
+  }
+
+  Operator getCurrentOperFromString(String oper){
+    if(oper == Operators.OR.value) return Operators.OR; 
+    if(oper == Operators.OR2.value) return Operators.OR2;
+
+    if(oper == Operators.AND.value) return Operators.AND; 
+    if(oper == Operators.AND2.value) return Operators.AND2;
+    
+    
+    if(oper == Operators.NOT.value) return Operators.NOT; 
+    if(oper == Operators.NOT2.value) return Operators.NOT2;
+    if(oper == Operators.NOT3.value) return Operators.NOT3;
+  
+
+    if(oper == Operators.XOR.value) return Operators.XOR; 
+    if(oper == Operators.XOR2.value) return Operators.XOR2;
+
+
+    
+    return null;  
+
+  }
+
+  int get nextKey {
+    return ++keyStepGenerator;
+  }
+
+  void getSteps(String postfija) {
+    List<String> stack = [];
+    print("Postfija $postfija");
+    for (String c in postfija.split("")) {
+      print("$c");
+      Operator currentOper;
+      if (alphabet.contains(c)) {
+        stack.add(c);
+      } else {
+        String a, b;
+        a = stack.removeLast();
+        if (this.notOpers.contains(c)) {
+          currentOper = getCurrentOperFromString(c);
+          Step s = new Step(operator: currentOper, variable1: a, isSingleVariable: true);
+          steps.add(s);
+          stack.add(s.toString());
+        } else {
+          b = stack.removeLast();
+          if (this.orOpers.contains(c)) {
+          
+            currentOper = getCurrentOperFromString(c);
+          } else if (this.andOpers.contains(c)) {
+            currentOper = getCurrentOperFromString(c);
+          } else if (c == Operators.CODICIONAL.value) {
+            currentOper = Operators.CODICIONAL;
+          } else if (c == Operators.BICODICIONAL.value) {
+            currentOper = Operators.BICODICIONAL;
+          } else if (c == Operators.NOR.value) {
+            currentOper = Operators.NOR;
+          } else if (c == Operators.NAND.value) {
+            currentOper = Operators.NAND;
+          } else if (this.xorOpers.contains(c)) {
+            currentOper = getCurrentOperFromString(c);
+          } else if (c == Operators.ANTICODICIONAL.value) {
+            currentOper = Operators.ANTICODICIONAL;
+          } else if (c == Operators.NOT_CONDITIONAL.value) {
+            currentOper = Operators.NOT_CONDITIONAL;
+          } else if (c == Operators.NOT_CONDITIONAL_INVERSE.value) {
+            currentOper = Operators.NOT_CONDITIONAL_INVERSE;
+          } else if (c == Operators.NOT_BICONDITIONAL.value) {
+            currentOper = Operators.NOT_BICONDITIONAL;
+          } else if (c == Operators.TAUTOLOGY.value) {
+            currentOper = Operators.TAUTOLOGY;
+          } else if (c == Operators.CONTRADICTION.value) {
+            currentOper = Operators.CONTRADICTION;
+          }
+          Step s = new Step(operator: currentOper, variable1: b, variable2: a);
+          steps.add(s);
+          if(!opersHistory.containsKey(s)){
+            int stepKey = nextKey;
+            opersHistory[s.toString()] = "$stepKey";
+          }
+          stack.add(s.toString());
+          print("Added: ${steps.last}");
+        }
+      }
+    }
   }
 }
