@@ -28,7 +28,8 @@ class _StepByStepScreenState extends State<StepByStepScreen> {
           color: kMainColor, //change your color here
         ),
         title: Text(
-          STEP_BY_STEP_LABEL,
+          widget.table.initialInfix,
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: kMainColor,
           ),

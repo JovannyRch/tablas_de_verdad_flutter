@@ -137,6 +137,7 @@ class TableWidget extends StatelessWidget {
       child: Center(
           child: Text(
         "$label",
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: fontSize,

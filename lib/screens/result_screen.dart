@@ -135,7 +135,7 @@ class _ResultScreenState extends State<ResultScreen> {
             ),
             child: Center(
               child: Text(
-                "${widget.table.infix}",
+                "${widget.table.initialInfix}",
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w500,
@@ -185,7 +185,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   ),
                 ),
               ),
-              Positioned(
+            /*   Positioned(
                 right: 0.0,
                 top: 5.0,
                 child: IconButton(
@@ -194,7 +194,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       color: kMainColor.withOpacity(0.8),
                     ),
                     onPressed: handleEvaluationHelp),
-              )
+              ) */
             ],
           ),
         ],

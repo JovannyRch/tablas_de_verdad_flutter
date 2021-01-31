@@ -8,8 +8,10 @@ import 'package:tablas_de_verdad/models/RowTable.dart';
 
 class TruthTable {
   String infix;
+  String initialInfix;
   String postfix;
-  TruthTable(this.infix);
+  
+
   int counter1s = 0;
   int counters0s = 0;
   List<String> variables = [];
@@ -60,6 +62,18 @@ class TruthTable {
 
   String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01";
   String tipo = "";
+
+  TruthTable(this.infix){
+    initialInfix = infix;
+    formatInput();
+  }
+
+  void formatInput(){
+    infix = infix.replaceAll('[', '(');
+    infix = infix.replaceAll(']', ')');
+    infix = infix.replaceAll('{', '(');
+    infix = infix.replaceAll('}', ')');
+  }
 
   bool convertInfixToPostix() {
     this.postfix = this.infixToPostfix(this.infix);
@@ -280,7 +294,12 @@ class TruthTable {
         if (!this.variables.contains(token)) {
           this.variables.add(token);
         }
-      } else if (token == ")") {
+      } 
+      
+      else if (token == "(") {
+        opStack.add(token);
+      }
+      else if (token == ")") {
         if (opStack.isEmpty) {
           errorMessage = "Paréntesis incompletos";
           return null;
@@ -320,7 +339,7 @@ class TruthTable {
 
   bool checkIfIsCorrectlyFormed() {
     List<String> pila = [];
-
+    print("Postfija: $postfix");
     for (String c in this.postfix.split("")) {
       if (isOperator(c)) {
         if (pila.isEmpty) {
