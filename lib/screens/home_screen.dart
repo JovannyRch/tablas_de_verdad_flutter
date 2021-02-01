@@ -7,15 +7,13 @@ import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/models/operators.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
 import 'package:tablas_de_verdad/screens/result_screen.dart';
+import 'package:tablas_de_verdad/services/Admob.dart';
 import 'package:tablas_de_verdad/widgets/ButtonWidget.dart';
 import 'package:tablas_de_verdad/widgets/DisplayWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/shared/UserPreferences.dart';
 
-import 'dart:async';
-
-import 'package:flutter_native_admob/flutter_native_admob.dart';
-import 'package:flutter_native_admob/native_admob_controller.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -29,18 +27,29 @@ class _HomeScreenState extends State<HomeScreen> {
   UserPrefences userPrefences = new UserPrefences();
 
   //Ads
-  final _nativeAdController = NativeAdmobController();
+  BannerAd _bannerAd;
+  InterstitialAd _interstitialAd;
+ 
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
-   
+    FirebaseAdMob.instance.initialize(appId: AdmobService.getAdmobId());
+    _bannerAd = AdmobService.createBannerAdd()..load();
+    _interstitialAd = AdmobService.createInterstitialAd()..load();
+  }
+
+  @override
+  void dispose() {
+    
+    _bannerAd?.dispose();
+    _interstitialAd?.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     appProvider = Provider.of<AppProvider>(context);
-
     return Scaffold(
       body: _body(),
     );
@@ -255,7 +264,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void handleClickButton(String label) {
-
     if (label == CLEAR_INPUT) {
       appProvider.clearInput();
     } else if (label == REMOVE_LETTER) {
@@ -298,6 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
+    _interstitialAd?.show().then((value) => _interstitialAd = AdmobService.createInterstitialAd()..load());
     Navigator.push(
       context,
       CupertinoPageRoute(

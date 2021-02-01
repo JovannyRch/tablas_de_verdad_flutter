@@ -1,3 +1,4 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,6 +7,7 @@ import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
 import 'package:tablas_de_verdad/screens/step_by_step_screen.dart';
+import 'package:tablas_de_verdad/services/Admob.dart';
 
 import 'package:tablas_de_verdad/widgets/TableWidget.dart';
 
@@ -25,11 +27,26 @@ class _ResultScreenState extends State<ResultScreen> {
   AppProvider appProvider;
 /*   AdmobInterstitial interstitialAd; */
 
+//Ads
+  //Ads
+  BannerAd _bannerAd;
+  InterstitialAd _interstitialAd;
+
   @override
   void initState() {
     calculate();
     showAd();
+    FirebaseAdMob.instance.initialize(appId: AdmobService.getAdmobId());
+    _bannerAd = AdmobService.createBannerAdd()..load();
+    _interstitialAd = AdmobService.createInterstitialAd()..load();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    _interstitialAd?.dispose();
+    super.dispose();
   }
 
   void showAd() {
@@ -89,6 +106,7 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   void handleStepByStepClickButton() {
+     _interstitialAd?.show().then((value) => _interstitialAd = AdmobService.createInterstitialAd()..load());
     Navigator.push(
       context,
       CupertinoPageRoute(

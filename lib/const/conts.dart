@@ -16,7 +16,7 @@ const F = "F";
 const ES = "es";
 const EN = "en";
 
-String LANGUAGE = EN;
+String LANGUAGE = ES;
 
 //Message
 Map<String, String> TAUTOLOGY = {
@@ -62,7 +62,7 @@ Map<String, String> STEP_LABEL = {
   EN: "Step"
 };
 
-String TITLE_APP ="Truth Tables";
+
 
 Map<String, String> SETTINGS = {
  ES: "Configuración",
@@ -105,8 +105,11 @@ Map<String, String> RATE_LABEL = {
   EN: "Rate this app"
 };
 
-const IS_TESTING = true;
+const IS_TESTING = false;
 
 
 
-const APP_ID = "com.jovannyrch.tablasdeverdad.en";
+const APP_ID = "com.jovannyrch.tablasdeverdad";
+String TITLE_APP ="Tablas de Verdad";
+//TODO 
+const DEFAULT_LANG = ES;
