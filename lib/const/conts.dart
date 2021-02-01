@@ -95,7 +95,7 @@ Map<String, String> SINTAXIS_ERROR = {
 
 
 Map<String, String> UNCOMPLETED_PARENTHESIS = {
-  ES:  "Error de paréntesis",
+  ES:  "Error de paréntesisu",
   EN: "Parenthesis errror"
 };
 
