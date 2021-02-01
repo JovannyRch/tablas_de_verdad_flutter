@@ -10,6 +10,8 @@ class TruthTable {
   String infix;
   String initialInfix;
   String postfix;
+
+  final String language;
   
 
   int counter1s = 0;
@@ -65,7 +67,7 @@ class TruthTable {
   String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01";
   String tipo = "";
 
-  TruthTable(this.infix){
+  TruthTable(this.infix, this.language){
     initialInfix = infix;
     formatInput();
   }
@@ -130,11 +132,11 @@ class TruthTable {
       }
     }
     if (counter1s == totalCombinations) {
-      tipo = TAUTOLOGY;
+      tipo = TAUTOLOGY[language];
     } else if (counters0s == totalCombinations) {
-      tipo = CONTRADICTION;
+      tipo = CONTRADICTION[language];
     } else {
-      tipo = CONTINGENCY;
+      tipo = CONTINGENCY[language];
     }
    /*   _printColumns(); */
   }
@@ -203,9 +205,6 @@ class TruthTable {
         }
         
         stack.add("$resultado");
-        print("Trying to access in position: $counterSteps");
-        print("Steps states: $statesSteps");
-        print("Index step ${statesSteps[counterSteps]}");
         if(columns.containsKey(stepsKeys[statesSteps[counterSteps]-1])){
           columns[stepsKeys[statesSteps[counterSteps]-1]].add("$resultado");
           counterSteps++;

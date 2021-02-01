@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -31,8 +32,8 @@ class _ResultScreenState extends State<ResultScreen> {
     super.initState();
   }
 
-  void showAd(){
-   /*  interstitialAd = AdmobInterstitial(
+  void showAd() {
+    /*  interstitialAd = AdmobInterstitial(
       adUnitId: AdmobService.videoId(),
     );
     interstitialAd.load(); */
@@ -68,7 +69,7 @@ class _ResultScreenState extends State<ResultScreen> {
           color: kMainColor, //change your color here
         ),
         title: Text(
-          RESULT_LABEL,
+          RESULT_LABEL[appProvider.language],
           style: TextStyle(
             color: kMainColor,
           ),
@@ -80,7 +81,7 @@ class _ResultScreenState extends State<ResultScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: handleStepByStepClickButton,
         icon: FaIcon(FontAwesomeIcons.tasks),
-        label: Text(STEP_BY_STEP_LABEL),
+        label: Text(STEP_BY_STEP_LABEL[appProvider.language]),
         backgroundColor: kMainColor,
       ),
       body: _body(),
@@ -90,10 +91,11 @@ class _ResultScreenState extends State<ResultScreen> {
   void handleStepByStepClickButton() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => StepByStepScreen(
-                table: widget.table,
-              )),
+      CupertinoPageRoute(
+        builder: (context) => StepByStepScreen(
+          table: widget.table,
+        ),
+      ),
     );
   }
 
@@ -128,7 +130,7 @@ class _ResultScreenState extends State<ResultScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            EXPRESSION_LABEL,
+            EXPRESSION_LABEL[appProvider.language],
             textAlign: TextAlign.left,
             style: TextStyle(
               color: kLabelColor,
@@ -168,7 +170,7 @@ class _ResultScreenState extends State<ResultScreen> {
         children: [
           SizedBox(height: 10.0),
           Text(
-            EVALUATION_LABEL,
+            EVALUATION_LABEL[appProvider.language],
             textAlign: TextAlign.left,
             style: TextStyle(
               color: kLabelColor,
@@ -194,7 +196,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   ),
                 ),
               ),
-            /*   Positioned(
+              /*   Positioned(
                 right: 0.0,
                 top: 5.0,
                 child: IconButton(
@@ -222,13 +224,12 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   Widget _table() {
-
-    if(widget.table.steps.length == 0){
+    if (widget.table.steps.length == 0) {
       return Center(child: Text("No steps"));
     }
 
     return TableWidget(
-      title: FINAL_TABLE_LABEL,
+      title: FINAL_TABLE_LABEL[appProvider.language],
       table: widget.table,
       columsKeys: [
         ...widget.table.variables,

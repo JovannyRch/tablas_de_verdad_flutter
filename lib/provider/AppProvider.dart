@@ -1,11 +1,32 @@
 import 'package:flutter/cupertino.dart';
+import 'package:tablas_de_verdad/const/conts.dart';
+import 'package:tablas_de_verdad/models/Messages.dart';
 
 class AppProvider with ChangeNotifier {
   String _input = "¬A∧¬A";
   bool _isUppercase = true;
   bool _isBasic = true;
   bool _is0sAnd1s = false;
+  String _language  = ES;
+  Messages _messages = new Messages();
 
+  Messages get messages{
+    return _messages;
+  }
+
+  void changeLanguage(String lang){
+    _messages.language = lang;
+    notifyListeners();
+  }
+
+  String get language{
+    return _language;
+  }
+
+  set language(String val){
+    _language = val;
+    notifyListeners();
+  }
 
   bool get is0sAnd1s {
     return _is0sAnd1s;

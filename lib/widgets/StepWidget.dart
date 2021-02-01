@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/models/Step.dart';
 import 'package:tablas_de_verdad/models/TruthTable.dart';
+import 'package:tablas_de_verdad/provider/AppProvider.dart';
 import 'package:tablas_de_verdad/widgets/TableWidget.dart';
 
 class StepWidget extends StatelessWidget {
   final StepProcess step;
   final TruthTable table;
   StepWidget({this.step, this.table});
+  AppProvider appProvider;
 
   @override
   Widget build(BuildContext context) {
+    appProvider = Provider.of<AppProvider>(context);
     return Container(
       margin: EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
       padding: EdgeInsets.all(10.0),
@@ -41,11 +45,20 @@ class StepWidget extends StatelessWidget {
 
   Widget _label() {
     return Text(
-      "$STEP_LABEL ${step.index}: ${step.operator.esName}",
+      "${STEP_LABEL[appProvider.language]} ${step.index}: ${operName()}",
       style: TextStyle(
         color: kLabelColor,
       ),
     );
+  }
+
+  String operName(){
+    if(appProvider.language == ES){
+      return step.operator.esName;
+    }
+    else{
+      return step.operator.enName;
+    }
   }
 
   Widget _title() {

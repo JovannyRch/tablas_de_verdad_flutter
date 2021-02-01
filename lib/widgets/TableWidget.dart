@@ -48,7 +48,7 @@ class TableWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _header(columsKeys, RESULT_LABEL),
+                    _header(columsKeys, RESULT_LABEL[appProvider.language]),
                     ...renderRows(),
                   ],
                 ),

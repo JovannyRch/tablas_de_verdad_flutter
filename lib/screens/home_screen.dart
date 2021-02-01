@@ -1,8 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/helpers/alerts.dart';
-import 'package:tablas_de_verdad/models/Operator.dart';
 import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/models/operators.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
@@ -270,11 +270,11 @@ class _HomeScreenState extends State<HomeScreen> {
     //TODO: Check if input is correctly formed
 
     if (appProvider.input.isEmpty) {
-      showSnackBarMessage(context, EMPTY_INPUT_MESSAGE);
+      showSnackBarMessage(context, EMPTY_INPUT_MESSAGE[appProvider.language]);
       return;
     }
 
-    TruthTable t = new TruthTable(appProvider.input);
+    TruthTable t = new TruthTable(appProvider.input, appProvider.language);
     bool isValid = t.convertInfixToPostix();
 
     if (!isValid) {
@@ -291,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => ResultScreen(
           table: t,
         ),
