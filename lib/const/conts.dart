@@ -62,7 +62,7 @@ Map<String, String> STEP_LABEL = {
   EN: "Step"
 };
 
-String TITLE_APP ="Tablas de verdad";
+String TITLE_APP ="Tablas de Verdad";
 
 Map<String, String> SETTINGS = {
  ES: "Configuración",
@@ -99,6 +99,14 @@ Map<String, String> UNCOMPLETED_PARENTHESIS = {
   EN: "Parenthesis errror"
 };
 
+
+Map<String, String> RATE_LABEL = {
+  ES:  "Califica la app",
+  EN: "Rate this app"
+};
+
 const IS_TESTING = true;
 
 
+
+const APP_ID = "com.jovannyrch.tablasdeverdad";
