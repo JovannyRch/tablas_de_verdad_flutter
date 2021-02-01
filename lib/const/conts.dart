@@ -26,3 +26,7 @@ const EVALUATION_LABEL = "Evaluación";
 const FINAL_TABLE_LABEL = "Tabla final";
 const STEP_BY_STEP_LABEL = "Paso a paso";
 const STEP_LABEL = "Paso";
+
+const TITLE_APP = "Tablas de verdad";
+
+const IS_TESTING = true;

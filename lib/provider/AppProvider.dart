@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class AppProvider with ChangeNotifier {
-  String _input = "";
+  String _input = "¬A∧¬A";
   bool _isUppercase = true;
   bool _isBasic = true;
   bool _is0sAnd1s = false;

@@ -292,9 +292,10 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => ResultScreen(
-                table: t,
-              )),
+        builder: (context) => ResultScreen(
+          table: t,
+        ),
+      ),
     );
   }
 

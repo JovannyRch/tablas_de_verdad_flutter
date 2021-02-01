@@ -26,6 +26,8 @@ class TruthTable {
   List<String> xorOpers = [Operators.XOR.value, Operators.XOR2.value];
   String errorMessage = "";
 
+  List<int> statesSteps = [];
+
   int index0InVariables = -1;
   int index1InVariables = -1;
   List<StepProcess> steps = [];
@@ -90,11 +92,13 @@ class TruthTable {
   }
 
   void calculate() {
+    print("init");
     table = [];
     counter1s = 0;
     counters0s = 0;
     variables.sort();
     createColumnsForVariables();
+    print("Variables:  $variables");
     StepProcess.currentIndex = variables.length-1;
     StepProcess.labelIndex = 0;
     //Get steps
@@ -156,7 +160,7 @@ class TruthTable {
   int evaluation(combination) {
     List<String> stack = [];
     List<String> stepsKeys = columns.keys.toList().sublist(variables.length);
-    
+    print("Steps keys: $stepsKeys");
     int counterSteps = 0;
     for (String c in combination.split("")) {
       if ("01".contains(c)) {
@@ -199,8 +203,11 @@ class TruthTable {
         }
         
         stack.add("$resultado");
-        if(columns.containsKey(stepsKeys[counterSteps])){
-          columns[stepsKeys[counterSteps]].add("$resultado");
+        print("Trying to access in position: $counterSteps");
+        print("Steps states: $statesSteps");
+        print("Index step ${statesSteps[counterSteps]}");
+        if(columns.containsKey(stepsKeys[statesSteps[counterSteps]-1])){
+          columns[stepsKeys[statesSteps[counterSteps]-1]].add("$resultado");
           counterSteps++;
         }
         
@@ -410,17 +417,23 @@ class TruthTable {
 
 
   
-  bool _checkCanAddStep(StepProcess step){
+  int _checkCanAddStep(StepProcess step){
+   
     for(StepProcess s in steps){
-      if(s.toString() == step.toString()) return false;
+      if(s.toString() == step.toString()) return s.index;
     }
-    return true;
+    return -1;
   }
 
   void _addStep(StepProcess step){
-    if(_checkCanAddStep(step)){
+    int index = _checkCanAddStep(step);
+    if( index == -1){
       columns[step.toString()] = [];
       steps.add(step);
+      statesSteps.add(step.index);
+    }else {
+      statesSteps.add(index);
+      StepProcess.backStep();
     }
   }
 

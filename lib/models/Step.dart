@@ -22,4 +22,8 @@ class StepProcess {
     }
     return "$variable1${operator.value}$variable2";
   }
+
+  static void backStep(){
+    labelIndex--;
+  }
 }

@@ -5,6 +5,7 @@ import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
 import 'package:tablas_de_verdad/screens/step_by_step_screen.dart';
+
 import 'package:tablas_de_verdad/widgets/TableWidget.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -20,13 +21,21 @@ class _ResultScreenState extends State<ResultScreen> {
   bool isLoading = false;
   double boxWidth = 60.0;
   Size size;
-
   AppProvider appProvider;
+/*   AdmobInterstitial interstitialAd; */
 
   @override
   void initState() {
     calculate();
+    showAd();
     super.initState();
+  }
+
+  void showAd(){
+   /*  interstitialAd = AdmobInterstitial(
+      adUnitId: AdmobService.videoId(),
+    );
+    interstitialAd.load(); */
   }
 
   void calculate() {
@@ -213,6 +222,11 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   Widget _table() {
+
+    if(widget.table.steps.length == 0){
+      return Center(child: Text("No steps"));
+    }
+
     return TableWidget(
       title: FINAL_TABLE_LABEL,
       table: widget.table,
