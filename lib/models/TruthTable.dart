@@ -94,13 +94,13 @@ class TruthTable {
   }
 
   void calculate() {
-    print("init");
+    
     table = [];
     counter1s = 0;
     counters0s = 0;
     variables.sort();
     createColumnsForVariables();
-    print("Variables:  $variables");
+    
     StepProcess.currentIndex = variables.length-1;
     StepProcess.labelIndex = 0;
     //Get steps
@@ -162,7 +162,7 @@ class TruthTable {
   int evaluation(combination) {
     List<String> stack = [];
     List<String> stepsKeys = columns.keys.toList().sublist(variables.length);
-    print("Steps keys: $stepsKeys");
+ 
     int counterSteps = 0;
     for (String c in combination.split("")) {
       if ("01".contains(c)) {
@@ -217,13 +217,7 @@ class TruthTable {
     return int.parse(stack.last);
   }
 
-  void _printColumns(){
-    print("Keys: ");
-    print(columns.keys);
-    for(String k in columns.keys){
-      print(columns[k]);
-    }
-  }
+ 
 
   int replicador(int a, int b) {
     if (a == 0 && b == 1) return 0;
@@ -345,7 +339,7 @@ class TruthTable {
 
   bool checkIfIsCorrectlyFormed() {
     List<String> pila = [];
-    print("Postfija: $postfix");
+    /* print("Postfija: $postfix"); */
     for (String c in this.postfix.split("")) {
       if (isOperator(c)) {
         if (pila.isEmpty) {

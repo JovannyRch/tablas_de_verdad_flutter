@@ -12,6 +12,11 @@ import 'package:tablas_de_verdad/widgets/DisplayWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/shared/UserPreferences.dart';
 
+import 'dart:async';
+
+import 'package:flutter_native_admob/flutter_native_admob.dart';
+import 'package:flutter_native_admob/native_admob_controller.dart';
+
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
 
@@ -22,19 +27,27 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   AppProvider appProvider;
   UserPrefences userPrefences = new UserPrefences();
-  
+
+  //Ads
+  final _nativeAdController = NativeAdmobController();
+
+  @override
+  void initState() { 
+    super.initState();
+   
+  }
 
   @override
   Widget build(BuildContext context) {
     appProvider = Provider.of<AppProvider>(context);
-    
+
     return Scaffold(
       body: _body(),
     );
   }
 
   Widget _body() {
-    return Container( 
+    return Container(
       child: Column(
         children: [
           Display(),
@@ -242,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void handleClickButton(String label) {
-    print(label);
+
     if (label == CLEAR_INPUT) {
       appProvider.clearInput();
     } else if (label == REMOVE_LETTER) {

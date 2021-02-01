@@ -62,7 +62,7 @@ Map<String, String> STEP_LABEL = {
   EN: "Step"
 };
 
-String TITLE_APP ="Tablas de Verdad";
+String TITLE_APP ="Truth Tables";
 
 Map<String, String> SETTINGS = {
  ES: "Configuración",
@@ -109,4 +109,4 @@ const IS_TESTING = true;
 
 
 
-const APP_ID = "com.jovannyrch.tablasdeverdad";
+const APP_ID = "com.jovannyrch.tablasdeverdad.en";

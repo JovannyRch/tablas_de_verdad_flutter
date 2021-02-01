@@ -24,8 +24,8 @@ class UserPrefences {
       return _prefs.getString("language");
     }
     else{
-      language = ES;
-      return ES;
+      language = EN;
+      return EN;
     }
   }
 
