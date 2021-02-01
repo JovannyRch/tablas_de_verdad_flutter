@@ -307,7 +307,7 @@ class TruthTable {
       }
       else if (token == ")") {
         if (opStack.isEmpty) {
-          errorMessage = "Paréntesis incompletos";
+          errorMessage = UNCOMPLETED_PARENTHESIS[language];
           return null;
         }
         String topToken = opStack.removeLast();
@@ -316,7 +316,7 @@ class TruthTable {
           postfixList.add(topToken);
 
           if (opStack.isEmpty) {
-            errorMessage = "Error de paréntesis";
+            errorMessage =  UNCOMPLETED_PARENTHESIS[language];
             return null;
           }
 
@@ -335,7 +335,7 @@ class TruthTable {
       String last = opStack.removeLast();
       if (last == "(") {
         errorMessage =
-            "Error de sintaxis, falta falta cerrar el paréntesis abierto";
+           CLOSE_PARENTHESIS[language];
         return null;
       }
       postfixList.add(last);
@@ -350,9 +350,9 @@ class TruthTable {
       if (isOperator(c)) {
         if (pila.isEmpty) {
           if (required2Operators(c)) {
-            this.errorMessage = "Error, el operador $c requiere 2 operandos";
+            this.errorMessage = "$c: ${REQUIRED_2_OPERATORS[language]}";
           } else {
-            this.errorMessage = "Error, el operador $c requiere 1 operando";
+            this.errorMessage = "$c: ${REQUIRED_1_OPERATORS[language]}";
           }
           return false;
         }
@@ -360,7 +360,7 @@ class TruthTable {
         String resultado;
         if (required2Operators(c)) {
           if (pila.isEmpty) {
-            this.errorMessage = "Error, el operador $c necesita 2 operandos";
+            this.errorMessage = "$c: ${REQUIRED_2_OPERATORS[language]}";
             return false;
           }
           pila.removeLast();
@@ -377,7 +377,7 @@ class TruthTable {
       return true;
     } else {
       this.errorMessage =
-          "Error de sintaxis, la proposición lógica no está bien formada";
+          SINTAXIS_ERROR[language];
       return false;
     }
   }

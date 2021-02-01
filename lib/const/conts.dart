@@ -69,4 +69,36 @@ Map<String, String> SETTINGS = {
  EN: "Setting"
 };
 
+
+Map<String, String> CLOSE_PARENTHESIS = {
+  ES:  "Error de sintaxis, falta falta cerrar el paréntesis abierto",
+  EN: "Sintaxis error, close the parenthesis"
+};
+
+
+Map<String, String> REQUIRED_2_OPERATORS = {
+  ES:  "requiere 2 operandos",
+  EN: "requires 2 operators"
+};
+
+
+Map<String, String> REQUIRED_1_OPERATORS = {
+  ES:  "requiere 1 operandos",
+  EN: "requires 1 operator"
+};
+
+Map<String, String> SINTAXIS_ERROR = {
+  ES:  "Error de sintaxis",
+  EN: "Sintaxis error"
+};
+
+
+
+Map<String, String> UNCOMPLETED_PARENTHESIS = {
+  ES:  "Error de paréntesis",
+  EN: "Parenthesis errror"
+};
+
 const IS_TESTING = true;
+
+
