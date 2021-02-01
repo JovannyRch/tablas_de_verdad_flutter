@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
+import 'package:tablas_de_verdad/shared/UserPreferences.dart';
 
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({Key key}) : super(key: key);
@@ -11,10 +12,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String dropdownValue = 'es';
   AppProvider appProvider;
+  UserPrefences userPrefences = new UserPrefences();
+  String dropdownValue;
+  
+
   @override
   Widget build(BuildContext context) {
+    dropdownValue = userPrefences.language;
+
     appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -54,6 +60,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onChanged: (String newValue) {
                   setState(() {
                     dropdownValue = newValue;
+                    userPrefences.language = newValue;
                     appProvider.language  = newValue;
                   });
                 },

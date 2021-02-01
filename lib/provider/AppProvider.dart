@@ -1,15 +1,21 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/models/Messages.dart';
+import 'package:tablas_de_verdad/shared/UserPreferences.dart';
 
 class AppProvider with ChangeNotifier {
   String _input = "¬A∧¬A";
   bool _isUppercase = true;
   bool _isBasic = true;
   bool _is0sAnd1s = false;
-  String _language  = ES;
   Messages _messages = new Messages();
 
+  UserPrefences _userPrefrences = new UserPrefences();
+  String _language;
+
+  AppProvider(String lang){
+    _language = lang;
+  }
+  
   Messages get messages{
     return _messages;
   }

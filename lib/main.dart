@@ -5,14 +5,21 @@ import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
 import 'package:tablas_de_verdad/screens/home_screen.dart';
+import 'package:tablas_de_verdad/shared/UserPreferences.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+   UserPrefences userPrefrences= new UserPrefences();
+   await userPrefrences.initPrefs();
   /* Admob.initialize(); */
-  runApp(MyApp());
+  runApp(MyApp(userPrefrences.language));
 }
 
 class MyApp extends StatelessWidget {
+  final String lang;
+  
+  MyApp(this.lang);
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -22,7 +29,7 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AppProvider()),
+        ChangeNotifierProvider(create: (_) => AppProvider(lang)),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

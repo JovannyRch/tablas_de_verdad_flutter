@@ -10,6 +10,7 @@ import 'package:tablas_de_verdad/screens/result_screen.dart';
 import 'package:tablas_de_verdad/widgets/ButtonWidget.dart';
 import 'package:tablas_de_verdad/widgets/DisplayWidget.dart';
 import 'package:provider/provider.dart';
+import 'package:tablas_de_verdad/shared/UserPreferences.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -20,25 +21,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   AppProvider appProvider;
-
-  @override
-  void initState() {
-    super.initState();
-    /* WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      appProvider = context.read<AppProvider>();
-    }); */
-  }
+  UserPrefences userPrefences = new UserPrefences();
+  
 
   @override
   Widget build(BuildContext context) {
     appProvider = Provider.of<AppProvider>(context);
+    
     return Scaffold(
       body: _body(),
     );
   }
 
   Widget _body() {
-    return Container(
+    return Container( 
       child: Column(
         children: [
           Display(),

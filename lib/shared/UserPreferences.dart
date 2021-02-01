@@ -1,24 +1,36 @@
 
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tablas_de_verdad/const/conts.dart';
+
 class UserPrefences {
   static final UserPrefences _instance = new UserPrefences._internal();
   
   
+  factory UserPrefences() {
+    return _instance;
+  }
+  
 
   UserPrefences._internal();
-  
-  /* SharedPrerences _prefs;
+
+  SharedPreferences _prefs;
 
   initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  get language {
-    return _prefs.getString("language") ?? '';
+  String get language {
+    if(_prefs.containsKey("language")){
+      return _prefs.getString("language");
+    }
+    else{
+      language = ES;
+      return ES;
+    }
   }
 
   set language(String language) {
     _prefs.setString('language', language);
   }
- */
 
 }
