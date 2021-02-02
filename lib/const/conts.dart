@@ -140,7 +140,7 @@ Map<String, String> SHOW_01s_LABEL = {
 
 
 //Change when app version changed
-const IS_TESTING = true;
+const IS_TESTING = false;
 
 const APP_ID = "com.jovannyrch.tablasdeverdad";
 String TITLE_APP ="Tablas de Verdad";
