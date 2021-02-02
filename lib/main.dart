@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = Provider.of<AppProvider>(context).currentTheme;
+    final currentTheme = Provider.of<AppProvider>(context).currentTheme??ThemeData.light();
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

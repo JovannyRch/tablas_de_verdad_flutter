@@ -24,7 +24,7 @@ class Display extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.only(bottom: 10.0, right: 20.0),
            /*  decoration: BoxDecoration(
-              color: Colors.white,
+              color: appProvider.isDarkMode?ThemeData.dark().backgroundColor: Colors.white,
             ), */
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,

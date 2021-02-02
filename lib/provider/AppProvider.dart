@@ -13,15 +13,15 @@ class AppProvider with ChangeNotifier {
 
   String _language;
 
-  ThemeData _currentTheme;
+  ThemeData _currentTheme = ThemeData.light();
 
   ThemeData get currentTheme => this._currentTheme;
 
   AppProvider(String lang, bool isShow01s, bool isDarkmode, bool isBasic){
-    _language = lang;
-    _is0sAnd1s = isShow01s;
-    _isDarkMode = isDarkmode;
-    _isBasic = isBasic;
+    language = lang;
+    is0sAnd1s = isShow01s;
+    isDarkMode = isDarkmode;
+    isBasic = isBasic;
   }
   
   Messages get messages{

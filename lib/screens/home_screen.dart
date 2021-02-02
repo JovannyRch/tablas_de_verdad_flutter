@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _body() {
     return Container(
+     /*  color: appProvider.isDarkMode? ThemeData.dark().scaffoldBackgroundColor:ThemeData.light().scaffoldBackgroundColor, */
       child: Column(
         children: [
           Display(),
