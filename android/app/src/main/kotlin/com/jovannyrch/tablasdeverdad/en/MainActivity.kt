@@ -1,4 +1,4 @@
-package com.jovannyrch.tablasdeverdad
+package com.jovannyrch.tablasdeverdad.en
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -142,7 +142,7 @@ Map<String, String> SHOW_01s_LABEL = {
 //Change when app version changed
 const IS_TESTING = false;
 
-const APP_ID = "com.jovannyrch.tablasdeverdad";
-String TITLE_APP ="Tablas de Verdad";
+const APP_ID = "com.jovannyrch.tablasdeverdad.en";
+String TITLE_APP ="Truth Tables";
 //TODO 
-const DEFAULT_LANG = ES;
+const DEFAULT_LANG = EN;
