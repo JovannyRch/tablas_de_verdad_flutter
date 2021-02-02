@@ -4,14 +4,21 @@ const kMainColor = Color(0xFFFF942B);
 const kSecondaryColor = Color(0XFFfbe6d1);
 const kDisableColor = Color(0xFFFDF6E4);
 const kLabelColor = Colors.black54;
+const kLabelColorDark = Colors.grey;
 
 const CLEAR_INPUT = "CLEAR_INPUT";
 const REMOVE_LETTER = "REMOVE_LETTER";
 
 const CHANGE_CASE = "CHANGE_CASE";
 
-const T = "T";
-const F = "F";
+Map<String, String> T = {
+  ES: "V",
+  EN: "T"
+};
+Map<String, String> F = {
+  ES: "F",
+  EN: "F"
+};
 
 const ES = "es";
 const EN = "en";
@@ -105,9 +112,35 @@ Map<String, String> RATE_LABEL = {
   EN: "Rate this app"
 };
 
-const IS_TESTING = false;
 
 
+Map<String, String> ADVANCE_MODE_LABEL = {
+  ES:  "Modo avanzado",
+  EN: "Advance mode"
+};
+
+
+Map<String, String> DARK_MODE_LABEL = {
+  ES:  "Modo oscuro",
+  EN: "Dark mode"
+};
+
+
+
+
+Map<String, String> SHOW_01s_LABEL = {
+  ES:  "Mostrar '01's en vez de 'VF's",
+  EN: "Show '01's instead of 'TF's"
+};
+
+
+
+
+
+
+
+//Change when app version changed
+const IS_TESTING = true;
 
 const APP_ID = "com.jovannyrch.tablasdeverdad";
 String TITLE_APP ="Tablas de Verdad";

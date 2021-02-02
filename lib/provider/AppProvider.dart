@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad/models/Messages.dart';
 import 'package:tablas_de_verdad/shared/UserPreferences.dart';
 
@@ -7,13 +8,20 @@ class AppProvider with ChangeNotifier {
   bool _isUppercase = true;
   bool _isBasic = true;
   bool _is0sAnd1s = false;
+  bool _isDarkMode = false;
   Messages _messages = new Messages();
 
-  UserPrefences _userPrefrences = new UserPrefences();
   String _language;
 
-  AppProvider(String lang){
+  ThemeData _currentTheme;
+
+  ThemeData get currentTheme => this._currentTheme;
+
+  AppProvider(String lang, bool isShow01s, bool isDarkmode, bool isBasic){
     _language = lang;
+    _is0sAnd1s = isShow01s;
+    _isDarkMode = isDarkmode;
+    _isBasic = isBasic;
   }
   
   Messages get messages{
@@ -24,6 +32,23 @@ class AppProvider with ChangeNotifier {
     _messages.language = lang;
     notifyListeners();
   }
+
+  bool get isDarkMode{
+    return _isDarkMode;
+  }
+
+  set isDarkMode(bool val){
+    _isDarkMode = val;
+    if(val){
+      _currentTheme = ThemeData.dark();
+    }
+    else{
+      _currentTheme = ThemeData.light();
+    }
+    notifyListeners();
+  }
+
+
 
   String get language{
     return _language;
@@ -95,8 +120,15 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void change01s(){
+  void isShow01s(){
     _is0sAnd1s = !_is0sAnd1s;
     notifyListeners();
   }
+
+  set is0sAnd1s(bool val){
+    _is0sAnd1s = val;
+    notifyListeners();
+  }
+
+
 }

@@ -10,34 +10,54 @@ import 'package:tablas_de_verdad/shared/UserPreferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   UserPrefences userPrefrences= new UserPrefences();
-   await userPrefrences.initPrefs();
-   await Firebase.initializeApp();
+  UserPrefences userPrefrences = new UserPrefences();
+  await userPrefrences.initPrefs();
+  await Firebase.initializeApp();
   /* Admob.initialize(); */
-  runApp(MyApp(userPrefrences.language));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => AppProvider(userPrefrences.language,
+              userPrefrences.isShow01s, userPrefrences.isDarkMode, userPrefrences.isBasic),
+        ),
+      ],
+      child: MyApp(userPrefrences.language, userPrefrences.isShow01s,
+          userPrefrences.isDarkMode),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   final String lang;
-  
-  MyApp(this.lang);
+  final bool isShow01s;
+  final bool isDarkMode;
+
+  MyApp(this.lang, this.isShow01s, this.isDarkMode);
 
   @override
   Widget build(BuildContext context) {
+    final currentTheme = Provider.of<AppProvider>(context).currentTheme;
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
 
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AppProvider(lang)),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: TITLE_APP,
-        home: HomeScreen(),
-      ),
+    return MaterialApp(
+      theme: currentTheme,
+      debugShowCheckedModeBanner: false,
+      title: TITLE_APP,
+      home: HomeScreen(),
     );
   }
 }
+
+/*
+return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppProvider(lang, isShow01s, isDarkMode)),
+      ],
+      
+    );
+*/

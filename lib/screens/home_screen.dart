@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: EdgeInsets.all(15.0),
         margin: EdgeInsets.symmetric(horizontal: 5.0),
         decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: appProvider.isDarkMode? Colors.grey.shade900:Colors.grey.shade100,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0)),

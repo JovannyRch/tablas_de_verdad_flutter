@@ -47,7 +47,7 @@ class StepWidget extends StatelessWidget {
     return Text(
       "${STEP_LABEL[appProvider.language]} ${step.index}: ${operName()}",
       style: TextStyle(
-        color: kLabelColor,
+        color: appProvider.isDarkMode? kLabelColorDark : kLabelColor,
       ),
     );
   }

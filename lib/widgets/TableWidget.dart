@@ -32,12 +32,15 @@ class TableWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          title.isNotEmpty?Text(
-            title,
-            style: TextStyle(
-              color: kLabelColor,
-            ),
-          ):Container(),
+          title.isNotEmpty
+              ? Text(
+                  title,
+                  style: TextStyle(
+                    color:
+                        appProvider.isDarkMode ? kLabelColorDark : kLabelColor,
+                  ),
+                )
+              : Container(),
           SizedBox(height: 10),
           Container(
             width: double.infinity,
@@ -68,8 +71,8 @@ class TableWidget extends StatelessWidget {
         combination += table.columns[columsKeys[j]][i];
       }
       String result = table.columns[resultColumnKey][i];
-      rows.add(
-          _rowTable(new RowTable(index: i, combination: combination, result: result)));
+      rows.add(_rowTable(
+          new RowTable(index: i, combination: combination, result: result)));
     }
     return rows;
   }
@@ -94,9 +97,9 @@ class TableWidget extends StatelessWidget {
   String showValue(String val) {
     if (!appProvider.is0sAnd1s) {
       if (val == "1") {
-        return T;
+        return T[appProvider.language];
       }
-      return F;
+      return F[appProvider.language];
     }
 
     return val;
@@ -124,15 +127,25 @@ class TableWidget extends StatelessWidget {
       height: 40.0,
       padding: EdgeInsets.all(2.0),
       decoration: BoxDecoration(
-          color: isHeader
-              ? kDisableColor
-              : !isFocus
-                  ? !isResultado
-                      ? Colors.grey.shade200
-                      : kMainColor.withOpacity(0.25)
-                  : !isResultado
-                      ? Colors.transparent
-                      : kMainColor.withOpacity(0.1),
+          color: appProvider.isDarkMode
+              ? (isHeader
+                  ? Colors.black
+                  : !isFocus
+                      ? !isResultado
+                          ? Colors.grey.shade800
+                          : kMainColor.withOpacity(0.45)
+                      : !isResultado
+                          ? Colors.transparent
+                          : kMainColor.withOpacity(0.2))
+              : isHeader
+                  ? kDisableColor
+                  : !isFocus
+                      ? !isResultado
+                          ? Colors.grey.shade200
+                          : kMainColor.withOpacity(0.25)
+                      : !isResultado
+                          ? Colors.transparent
+                          : kMainColor.withOpacity(0.1),
           border: Border.all(color: kMainColor.withOpacity(0.15))),
       child: Center(
           child: Text(

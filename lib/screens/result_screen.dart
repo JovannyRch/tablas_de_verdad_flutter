@@ -97,8 +97,16 @@ class _ResultScreenState extends State<ResultScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: handleStepByStepClickButton,
-        icon: FaIcon(FontAwesomeIcons.tasks),
-        label: Text(STEP_BY_STEP_LABEL[appProvider.language]),
+        icon: FaIcon(
+          FontAwesomeIcons.tasks,
+          color: Colors.white,
+        ),
+        label: Text(
+          STEP_BY_STEP_LABEL[appProvider.language],
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: kMainColor,
       ),
       body: _body(),
@@ -106,7 +114,8 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   void handleStepByStepClickButton() {
-     _interstitialAd?.show().then((value) => _interstitialAd = AdmobService.createInterstitialAd()..load());
+    _interstitialAd?.show().then((value) =>
+        _interstitialAd = AdmobService.createInterstitialAd()..load());
     Navigator.push(
       context,
       CupertinoPageRoute(
@@ -151,7 +160,7 @@ class _ResultScreenState extends State<ResultScreen> {
             EXPRESSION_LABEL[appProvider.language],
             textAlign: TextAlign.left,
             style: TextStyle(
-              color: kLabelColor,
+              color: appProvider.isDarkMode? kLabelColorDark: kLabelColor,
             ),
           ),
           SizedBox(height: 10.0),
@@ -168,7 +177,8 @@ class _ResultScreenState extends State<ResultScreen> {
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black87,
+                  color: appProvider.isDarkMode? kLabelColorDark.shade200: Colors.black87,
+                  
                 ),
               ),
             ),
@@ -191,7 +201,7 @@ class _ResultScreenState extends State<ResultScreen> {
             EVALUATION_LABEL[appProvider.language],
             textAlign: TextAlign.left,
             style: TextStyle(
-              color: kLabelColor,
+              color: appProvider.isDarkMode? kLabelColorDark: kLabelColor,
             ),
           ),
           Stack(
@@ -210,6 +220,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18.0,
+                      color: appProvider.isDarkMode? kLabelColorDark.shade200:Colors.black87,
                     ),
                   ),
                 ),

@@ -101,7 +101,7 @@ class Button extends StatelessWidget {
       return kMainColor;
     }
 
-    return Colors.black54;
+    return appProvider.isDarkMode? Colors.grey.shade200:Colors.black54;
   }
 
   double getFontSize() {
@@ -118,7 +118,7 @@ class Button extends StatelessWidget {
 
   Color _getBgColor() {
     if (label == CLEAR_INPUT || label == REMOVE_LETTER) {
-      return kSecondaryColor;
+      return appProvider.isDarkMode? Colors.grey.shade800:kSecondaryColor;
     }
 
     if (label == Operators.EQUAL.value) {
@@ -126,11 +126,11 @@ class Button extends StatelessWidget {
     }
 
     if (label == Operators.TRUE.value) {
-      return Colors.green;
+      return appProvider.isDarkMode? Colors.green.shade900:Colors.green;
     }
 
     if (label == Operators.FALSE.value) {
-      return Colors.red;
+      return appProvider.isDarkMode? Colors.red.shade900:Colors.red;
     }
 
     if(label == Operators.MODE.value){
@@ -138,12 +138,12 @@ class Button extends StatelessWidget {
     }
 
     if (isOperator) {
-      return Colors.white;
+      return appProvider.isDarkMode? Colors.grey.shade800:Colors.white;
     }
 
     
     
 
-    return Colors.white;
+    return appProvider.isDarkMode? Colors.grey.shade800:Colors.white;
   }
 }

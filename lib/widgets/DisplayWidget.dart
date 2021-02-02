@@ -23,9 +23,9 @@ class Display extends StatelessWidget {
             height: _size.height * 0.25,
             width: double.infinity,
             padding: EdgeInsets.only(bottom: 10.0, right: 20.0),
-            decoration: BoxDecoration(
+           /*  decoration: BoxDecoration(
               color: Colors.white,
-            ),
+            ), */
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -35,7 +35,7 @@ class Display extends StatelessWidget {
                   textAlign: TextAlign.end,
                   style: TextStyle(
                     fontSize: 45.0,
-                    color: Colors.black,
+                    color: appProvider.isDarkMode? Colors.grey.shade200:Colors.black,
                   ),
                 ),
               ],
