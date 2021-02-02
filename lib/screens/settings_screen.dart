@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
 import 'package:tablas_de_verdad/shared/UserPreferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   SettingsScreen({Key key}) : super(key: key);
@@ -16,11 +17,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   AppProvider appProvider;
   UserPrefences userPrefences = new UserPrefences();
   String dropdownValue;
+  Size _size;
 
   @override
   Widget build(BuildContext context) {
     dropdownValue = userPrefences.language;
-
+    _size = MediaQuery.of(context).size;
     appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +44,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _body() {
-    return Container(
+    var container = Container(
+      height: _size.height,
       width: double.infinity,
       child: SingleChildScrollView(
         child: Column(
@@ -113,6 +116,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
+    );
+    return Stack(
+      children: [
+        container,
+        Positioned(
+          right: 10.0,
+          bottom: 10.0,
+          child: GestureDetector(
+            child: Text(
+              "www.jovannyrch.com",
+              
+              style: TextStyle(
+                letterSpacing: 4.0,
+              ),
+            ),
+            onTap: () async {
+              print("Launch");
+              const url = "www.jovannyrch.com";
+              if (await canLaunch(url)) await launch(url);
+              
+            },
+          ),
+        )
+      ],
     );
   }
 }

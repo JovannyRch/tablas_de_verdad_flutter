@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   //Ads
   BannerAd _bannerAd;
   InterstitialAd _interstitialAd;
- 
 
   @override
   void initState() {
@@ -41,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    
     _bannerAd?.dispose();
     _interstitialAd?.dispose();
     super.dispose();
@@ -72,7 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: EdgeInsets.all(15.0),
         margin: EdgeInsets.symmetric(horizontal: 5.0),
         decoration: BoxDecoration(
-            color: appProvider.isDarkMode? Colors.grey.shade900:Colors.grey.shade100,
+            color: appProvider.isDarkMode
+                ? Colors.grey.shade900
+                : Colors.grey.shade100,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0)),
@@ -290,6 +290,10 @@ class _HomeScreenState extends State<HomeScreen> {
       showSnackBarMessage(context, EMPTY_INPUT_MESSAGE[appProvider.language]);
       return;
     }
+    if (appProvider.input.length == 1) {
+      showSnackBarMessage(context, EMPTY_INPUT_MESSAGE[appProvider.language]);
+      return;
+    }
 
     TruthTable t = new TruthTable(appProvider.input, appProvider.language);
     bool isValid = t.convertInfixToPostix();
@@ -306,7 +310,8 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
-    _interstitialAd?.show().then((value) => _interstitialAd = AdmobService.createInterstitialAd()..load());
+    _interstitialAd?.show().then((value) =>
+        _interstitialAd = AdmobService.createInterstitialAd()..load());
     Navigator.push(
       context,
       CupertinoPageRoute(

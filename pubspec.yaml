@@ -18,6 +18,7 @@ dependencies:
   shared_preferences: ^0.5.12+4
   firebase_core: ^0.5.2+1
   firebase_admob: ^0.10.2
+  url_launcher: ^5.7.10
 
 dev_dependencies:
   flutter_test:
