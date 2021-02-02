@@ -49,8 +49,8 @@ def keystoreProperties = new Properties()
         applicationId "com.jovannyrch.tablasdeverdad.en"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 20202
-        versionName '2.0.2'
+        versionCode 20203
+        versionName '2.0.3'
         multiDexEnabled true
     }
 

@@ -114,8 +114,10 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   void handleStepByStepClickButton() {
-    _interstitialAd?.show().then((value) =>
-        _interstitialAd = AdmobService.createInterstitialAd()..load());
+    if (!IS_PRO_VERSION) {
+      _interstitialAd?.show().then((value) =>
+          _interstitialAd = AdmobService.createInterstitialAd()..load());
+    }
     Navigator.push(
       context,
       CupertinoPageRoute(

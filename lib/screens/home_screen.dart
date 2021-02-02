@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _body() {
     return Container(
-     /*  color: appProvider.isDarkMode? ThemeData.dark().scaffoldBackgroundColor:ThemeData.light().scaffoldBackgroundColor, */
+      /*  color: appProvider.isDarkMode? ThemeData.dark().scaffoldBackgroundColor:ThemeData.light().scaffoldBackgroundColor, */
       child: Column(
         children: [
           Display(),
@@ -311,8 +311,10 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
-    _interstitialAd?.show().then((value) =>
-        _interstitialAd = AdmobService.createInterstitialAd()..load());
+    if (!IS_PRO_VERSION) {
+      _interstitialAd?.show().then((value) =>
+          _interstitialAd = AdmobService.createInterstitialAd()..load());
+    }
     Navigator.push(
       context,
       CupertinoPageRoute(

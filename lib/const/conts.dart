@@ -114,6 +114,13 @@ Map<String, String> RATE_LABEL = {
 
 
 
+Map<String, String> PRO_LABEL = {
+  ES:  "Pro",
+  EN: "Pro"
+};
+
+
+
 Map<String, String> ADVANCE_MODE_LABEL = {
   ES:  "Modo avanzado",
   EN: "Advance mode"
@@ -140,7 +147,8 @@ Map<String, String> SHOW_01s_LABEL = {
 
 
 //Change when app version changed
-const IS_TESTING = false;
+const IS_PRO_VERSION = true;
+const IS_TESTING = true;
 
 const APP_ID = "com.jovannyrch.tablasdeverdad.en";
 String TITLE_APP ="Truth Tables";

@@ -16,6 +16,85 @@ class Display extends StatelessWidget {
   Widget build(BuildContext context) {
     appProvider = Provider.of<AppProvider>(context);
     _size = MediaQuery.of(context).size;
+    var review = GestureDetector(
+      onTap: () {
+        this.callReview();
+      },
+      child: Container(
+        width: 150.0,
+        padding: EdgeInsets.all(2.0),
+        margin: EdgeInsets.only(top: 15.0),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: kMainColor,
+            width: 1.0,
+          ),
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              Icons.star,
+              color: kMainColor,
+            ),
+            SizedBox(
+              width: 5.0,
+            ),
+            Text(
+              RATE_LABEL[appProvider.language],
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: kMainColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 17.0,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    var pro_version = GestureDetector(
+      onTap: () {
+        this.callProVersion();
+      },
+      child: Container(
+        width: 100.0,
+        padding: EdgeInsets.all(2.0),
+        margin: EdgeInsets.only(top: 15.0,left: 10.0),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: kMainColor,
+            width: 1.0,
+          ),
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            FaIcon(
+              FontAwesomeIcons.gem,
+              size: 16.0,
+              color: kMainColor,
+            ),
+            SizedBox(
+              width: 5.0,
+            ),
+            Text(
+              "Pro",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: kMainColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 17.0,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
     return SafeArea(
       child: Stack(
         children: [
@@ -23,9 +102,9 @@ class Display extends StatelessWidget {
             height: _size.height * 0.25,
             width: double.infinity,
             padding: EdgeInsets.only(bottom: 10.0, right: 20.0),
-           /*  decoration: BoxDecoration(
-              color: appProvider.isDarkMode?ThemeData.dark().backgroundColor: Colors.white,
-            ), */
+            /*  decoration: BoxDecoration(
+                  color: appProvider.isDarkMode?ThemeData.dark().backgroundColor: Colors.white,
+                ), */
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -35,7 +114,9 @@ class Display extends StatelessWidget {
                   textAlign: TextAlign.end,
                   style: TextStyle(
                     fontSize: 45.0,
-                    color: appProvider.isDarkMode? Colors.grey.shade200:Colors.black,
+                    color: appProvider.isDarkMode
+                        ? Colors.grey.shade200
+                        : Colors.black,
                   ),
                 ),
               ],
@@ -59,43 +140,11 @@ class Display extends StatelessWidget {
           ),
           Positioned(
             left: 10.0,
-            child: GestureDetector(
-              onTap: () {
-                this.callReview();
-              },
-              child: Container(
-                width: 150.0,
-                padding: EdgeInsets.all(2.0),
-                margin: EdgeInsets.only(top: 15.0),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: kMainColor,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(
-                      Icons.star,
-                      color: kMainColor,
-                    ),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Text(
-                      RATE_LABEL[appProvider.language],
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: kMainColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            child: Row(
+              children: [
+                review,
+                IS_PRO_VERSION?Container():pro_version
+              ],
             ),
           ),
         ],
@@ -106,6 +155,13 @@ class Display extends StatelessWidget {
   void callReview() {
     LaunchReview.launch(
       androidAppId: APP_ID,
+      iOSAppId: "585027354",
+    );
+  }
+
+  void callProVersion() {
+    LaunchReview.launch(
+      androidAppId: "com.jovannyrch.tablasdeverdad.pro",
       iOSAppId: "585027354",
     );
   }
