@@ -159,6 +159,25 @@ Map<String, String> NO_ADS_SUBJECT = {
 
 
 
+Map<String, String> CHECKOUT_LABEL = {
+  ES: "Detalles del pago",
+  EN:  "Checkout"
+};
+
+
+
+
+Map<String, String> PAYMENT_LABEL = {
+  ES:  "Método de pago",
+  EN: "Payment"
+};
+
+Map<String, String> CREDIT_CARD = {
+  ES:  "Tarjeda de crédito",
+  EN: "Credit Card"
+};
+
+
 
 //Change when app version changed
 const IS_PRO_VERSION = false;

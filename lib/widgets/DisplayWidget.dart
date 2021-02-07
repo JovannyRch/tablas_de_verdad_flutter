@@ -5,6 +5,7 @@ import 'package:launch_review/launch_review.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
+import 'package:tablas_de_verdad/screens/pro/pro_details_screen.dart';
 import 'package:tablas_de_verdad/screens/settings_screen.dart';
 
 class Display extends StatelessWidget {
@@ -57,12 +58,12 @@ class Display extends StatelessWidget {
 
     var pro_version = GestureDetector(
       onTap: () {
-        this.callProVersion();
+        this.callProVersion(context);
       },
       child: Container(
         width: 100.0,
         padding: EdgeInsets.all(2.0),
-        margin: EdgeInsets.only(top: 15.0,left: 10.0),
+        margin: EdgeInsets.only(top: 15.0, left: 10.0),
         decoration: BoxDecoration(
           border: Border.all(
             color: kMainColor,
@@ -141,10 +142,7 @@ class Display extends StatelessWidget {
           Positioned(
             left: 10.0,
             child: Row(
-              children: [
-                review,
-                IS_PRO_VERSION?Container():pro_version
-              ],
+              children: [review, IS_PRO_VERSION ? Container() : pro_version],
             ),
           ),
         ],
@@ -153,17 +151,16 @@ class Display extends StatelessWidget {
   }
 
   void callReview() {
-
     LaunchReview.launch(
       androidAppId: APP_ID,
       iOSAppId: "585027354",
     );
   }
 
-  void callProVersion() {
-    LaunchReview.launch(
-      androidAppId: "com.jovannyrch.tablasdeverdad.pro",
-      iOSAppId: "585027354",
+  void callProVersion(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProDetailScreen()),
     );
   }
 }
