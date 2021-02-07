@@ -13,7 +13,6 @@ void main() async {
   UserPrefences userPrefrences = new UserPrefences();
   await userPrefrences.initPrefs();
   await Firebase.initializeApp();
-  /* Admob.initialize(); */
   runApp(
     MultiProvider(
       providers: [

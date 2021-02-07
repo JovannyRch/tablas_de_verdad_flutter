@@ -153,6 +153,7 @@ class Display extends StatelessWidget {
   }
 
   void callReview() {
+
     LaunchReview.launch(
       androidAppId: APP_ID,
       iOSAppId: "585027354",

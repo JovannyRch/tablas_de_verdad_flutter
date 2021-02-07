@@ -30,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
   BannerAd _bannerAd;
   InterstitialAd _interstitialAd;
 
+  int counter = 0;
+
   @override
   void initState() {
     super.initState();
@@ -266,6 +268,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void handleClickButton(String label) {
     if (label == CLEAR_INPUT) {
+      if (!userPrefences.isProMode) {
+        counter++;
+        if (counter == 4) {
+          userPrefences.isProMode = true;
+          showSnackBarMessage(context, "PRO MODE! :)");
+        }
+      }
       appProvider.clearInput();
     } else if (label == REMOVE_LETTER) {
       appProvider.removerLetter();
@@ -288,7 +297,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //TODO: Check if input is correctly formed
 
     if (appProvider.input.isEmpty) {
-      showSnackBarMessage(context, EMPTY_INPUT_MESSAGE[appProvider.language]);
+       showSnackBarMessage(context, EMPTY_INPUT_MESSAGE[appProvider.language]);
       return;
     }
     if (appProvider.input.length == 1) {
@@ -311,7 +320,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
-    if (!IS_PRO_VERSION) {
+    if (!IS_PRO_VERSION && !userPrefences.isProMode) {
       _interstitialAd?.show().then((value) =>
           _interstitialAd = AdmobService.createInterstitialAd()..load());
     }

@@ -67,4 +67,17 @@ class UserPrefences {
   set isBasic(bool isBasic) {
     _prefs.setBool('isBasic', isBasic);
   }
+
+  bool get isProMode {
+    if (_prefs.containsKey("isProMode")) {
+      return _prefs.getBool("isProMode");
+    } else {
+      isProMode = false;
+      return false;
+    }
+  }
+
+  set isProMode(bool isProMode) {
+    _prefs.setBool('isProMode', isProMode);
+  }
 }

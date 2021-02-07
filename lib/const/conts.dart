@@ -141,16 +141,32 @@ Map<String, String> SHOW_01s_LABEL = {
 };
 
 
+Map<String, String> DONATE_LABEL = {
+  ES:  "Donar",
+  EN: "Donate"
+};
 
+
+Map<String, String> NO_ADS_LABEL = {
+  ES:  "¿Quitar anuncios? Obtiene un cupón",
+  EN: "Remove ads? Get a cupon"
+};
+
+Map<String, String> NO_ADS_SUBJECT = {
+  ES:  "TablasDeVerdad Cupón",
+  EN: "TruthTables coupon!"
+};
 
 
 
 
 //Change when app version changed
-const IS_PRO_VERSION = true;
+const IS_PRO_VERSION = false;
 const IS_TESTING = true;
 
 const APP_ID = "com.jovannyrch.tablasdeverdad.en";
 String TITLE_APP ="Truth Tables";
 //TODO 
 const DEFAULT_LANG = EN;
+
+

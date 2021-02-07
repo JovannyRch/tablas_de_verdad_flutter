@@ -8,6 +8,7 @@ import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
 import 'package:tablas_de_verdad/screens/step_by_step_screen.dart';
 import 'package:tablas_de_verdad/services/Admob.dart';
+import 'package:tablas_de_verdad/shared/UserPreferences.dart';
 
 import 'package:tablas_de_verdad/widgets/TableWidget.dart';
 
@@ -32,10 +33,12 @@ class _ResultScreenState extends State<ResultScreen> {
   BannerAd _bannerAd;
   InterstitialAd _interstitialAd;
 
+  UserPrefences userPrefences = new UserPrefences();
+
   @override
   void initState() {
     calculate();
-    showAd();
+ 
     FirebaseAdMob.instance.initialize(appId: AdmobService.getAdmobId());
     _bannerAd = AdmobService.createBannerAdd()..load();
     _interstitialAd = AdmobService.createInterstitialAd()..load();
@@ -49,12 +52,6 @@ class _ResultScreenState extends State<ResultScreen> {
     super.dispose();
   }
 
-  void showAd() {
-    /*  interstitialAd = AdmobInterstitial(
-      adUnitId: AdmobService.videoId(),
-    );
-    interstitialAd.load(); */
-  }
 
   void calculate() {
     setIsLoading(true);
@@ -114,7 +111,8 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   void handleStepByStepClickButton() {
-    if (!IS_PRO_VERSION) {
+    
+    if (!IS_PRO_VERSION && !userPrefences.isProMode) {
       _interstitialAd?.show().then((value) =>
           _interstitialAd = AdmobService.createInterstitialAd()..load());
     }

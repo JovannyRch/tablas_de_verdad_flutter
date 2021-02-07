@@ -120,22 +120,69 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Stack(
       children: [
         container,
+        IS_PRO_VERSION
+            ? Container()
+            : Positioned(
+                left: 10.0,
+                bottom: 55.0,
+                child: RaisedButton(
+                  color: Colors.green,
+                  child: Row(children: [
+                    FaIcon(
+                      FontAwesomeIcons.ticketAlt,
+                    ),
+                    SizedBox(width: 10.0),
+                    Text(
+                      NO_ADS_LABEL[appProvider.language],
+                      style: TextStyle(),
+                    )
+                  ]),
+                  onPressed: () async {
+                    final Uri _emailLaunchUri = Uri(
+                        scheme: 'mailto',
+                        path: 'jovannyrch@gmail.com',
+                        queryParameters: {
+                          'subject': NO_ADS_SUBJECT[appProvider.language]
+                        });
+                    await launch(_emailLaunchUri.toString());
+                  },
+                ),
+              ),
+        IS_PRO_VERSION
+            ? Container()
+            : Positioned(
+                left: 10.0,
+                bottom: 10.0,
+                child: RaisedButton(
+                  child: Row(children: [
+                    FaIcon(
+                      FontAwesomeIcons.paypal,
+                    ),
+                    SizedBox(width: 10.0),
+                    Text(
+                      DONATE_LABEL[appProvider.language],
+                      style: TextStyle(),
+                    )
+                  ]),
+                  onPressed: () async {
+                    const url = "https://paypal.me/jovannyrch";
+                    await launch(url);
+                  },
+                ),
+              ),
         Positioned(
           right: 10.0,
           bottom: 10.0,
           child: GestureDetector(
             child: Text(
               "www.jovannyrch.com",
-              
               style: TextStyle(
-                letterSpacing: 4.0,
+                letterSpacing: 2.5,
               ),
             ),
             onTap: () async {
-              print("Launch");
-              const url = "www.jovannyrch.com";
-              if (await canLaunch(url)) await launch(url);
-              
+              const url = "https://www.jovannyrch.com/";
+              await launch(url);
             },
           ),
         )
