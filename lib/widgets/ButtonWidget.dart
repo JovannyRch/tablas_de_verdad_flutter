@@ -141,9 +141,6 @@ class Button extends StatelessWidget {
       return appProvider.isDarkMode? Colors.grey.shade800:Colors.white;
     }
 
-    
-    
-
     return appProvider.isDarkMode? Colors.grey.shade800:Colors.white;
   }
 }

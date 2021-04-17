@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
 import 'package:tablas_de_verdad/screens/pro/payment_method.dart';
-
+import 'package:in_app_purchase/in_app_purchase.dart';
 class ProDetailScreen extends StatelessWidget {
   AppProvider appProvider;
   Size size;
@@ -67,10 +67,7 @@ class ProDetailScreen extends StatelessWidget {
   }
 
   void handleCompletePaymentButton(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => PaymentMethod()),
-    );
+    
   }
 
   Widget _summaryContainer() {

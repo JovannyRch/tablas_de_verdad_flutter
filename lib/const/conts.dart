@@ -169,7 +169,7 @@ Map<String, String> CHECKOUT_LABEL = {
 
 Map<String, String> PAYMENT_LABEL = {
   ES:  "Método de pago",
-  EN: "Payment"
+  EN: "Payment method"
 };
 
 Map<String, String> CREDIT_CARD = {
@@ -183,9 +183,9 @@ Map<String, String> CREDIT_CARD = {
 const IS_PRO_VERSION = false;
 const IS_TESTING = true;
 
-const APP_ID = "com.jovannyrch.tablasdeverdad.en";
-String TITLE_APP ="Truth Tables";
+const APP_ID = "com.jovannyrch.tablasdeverdad";
+String TITLE_APP ="Tablas de Verdad";
 //TODO 
-const DEFAULT_LANG = EN;
+const DEFAULT_LANG = ES;
 
 

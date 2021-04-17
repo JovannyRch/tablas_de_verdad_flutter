@@ -20,6 +20,7 @@ dependencies:
   firebase_admob: ^0.10.2
   url_launcher: ^5.7.10
   credit_card: ^0.1.8
+  in_app_purchase: ^0.5.1
 
 dev_dependencies:
   flutter_test:

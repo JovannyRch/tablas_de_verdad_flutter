@@ -142,7 +142,7 @@ class Display extends StatelessWidget {
           Positioned(
             left: 10.0,
             child: Row(
-              children: [review, IS_PRO_VERSION ? Container() : pro_version],
+              children: [review, /* IS_PRO_VERSION ? Container() : pro_version */],
             ),
           ),
         ],

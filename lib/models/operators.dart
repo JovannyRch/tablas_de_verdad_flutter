@@ -12,8 +12,8 @@ class Operators {
   static final Operator BICODICIONAL = new Operator(value: "⇔", enName: "Material Equivalence", esName: "Bicondicional/Doble implicación");
   static final Operator CODICIONAL = new Operator(value: "⇒", enName: "Material Implication", esName: "Condicional/Implicación");
   static final Operator ANTICODICIONAL = new Operator(value: "￩", enName: "Inverse conditional/Replier", esName: "Condicional inverso/Replicador");
-  static final Operator TRUE = new Operator(value: "FALSE", enName: "1", esName: "1");
-  static final Operator FALSE = new Operator(value: "TRUE", enName: "1", esName: "1");
+  static final Operator TRUE = new Operator(value: "TRUE", enName: "1", esName: "1");
+  static final Operator FALSE = new Operator(value: "FALSE", enName: "1", esName: "1");
 
   static final Operator XOR = new Operator(value: "⊕", enName: "Exclusive Disjunction", esName: "XOR/Disyunción exclusiva");
   static final Operator XOR2 = new Operator(value: "⊻", enName: "Exclusive Disjunction", esName: "XOR/Disyunción exclusiva");

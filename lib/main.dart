@@ -52,11 +52,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/*
-return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AppProvider(lang, isShow01s, isDarkMode)),
-      ],
-      
-    );
-*/
