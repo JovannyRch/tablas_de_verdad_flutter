@@ -8,15 +8,14 @@ class AdmobService {
   static const MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo();
 
   static String getAdmobId() {
+    
     if (Platform.isIOS) {
       return "";
     } else if (Platform.isAndroid) {
       if (IS_TESTING) {
         return "ca-app-pub-3940256099942544~3347511713";
       }
-
-      //return 'ca-app-pub-4665787383933447~4689744776'; //ES
-      return 'ca-app-pub-4665787383933447~1652617896';  //EN
+      return ADMOB_ID; //EN
     }
     return '';
   }
@@ -28,13 +27,11 @@ class AdmobService {
       if (IS_TESTING) {
         return "ca-app-pub-3940256099942544/1033173712"; 
       }
-      //return 'ca-app-pub-4665787383933447/1334937592'; //ES
-      return 'ca-app-pub-4665787383933447/6090070907'; //EN 
+      return VIDEO_ID; //EN 
     }
   }
 
-  static 
-  InterstitialAd createInterstitialAd() {
+  static InterstitialAd createInterstitialAd() {
     return InterstitialAd(
       targetingInfo: targetingInfo,
       adUnitId: AdmobService.videoId(),
@@ -52,5 +49,5 @@ class AdmobService {
       },
     );
   }
-
+ 
 }

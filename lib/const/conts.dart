@@ -181,11 +181,22 @@ Map<String, String> CREDIT_CARD = {
 
 //Change when app version changed
 const IS_PRO_VERSION = false;
-const IS_TESTING = true;
+const IS_TESTING = false;
 
-const APP_ID = "com.jovannyrch.tablasdeverdad";
-String TITLE_APP ="Tablas de Verdad";
+const APP_ID = "com.jovannyrch.tablasdeverdad.en";
+String TITLE_APP ="Truth Tables";
 //TODO 
-const DEFAULT_LANG = ES;
+const DEFAULT_LANG = EN;
 
+
+
+const ADMOB_ID = "ca-app-pub-4665787383933447~1652617896";
+//return 'ca-app-pub-4665787383933447~4689744776'; //ES
+//return 'ca-app-pub-4665787383933447~1652617896'; //EN
+
+
+const VIDEO_ID = "ca-app-pub-4665787383933447/6090070907";
+
+//return 'ca-app-pub-4665787383933447/1334937592'; //ES
+//return 'ca-app-pub-4665787383933447/6090070907'; //EN
 

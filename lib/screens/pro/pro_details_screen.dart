@@ -5,8 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
 import 'package:tablas_de_verdad/provider/AppProvider.dart';
-import 'package:tablas_de_verdad/screens/pro/payment_method.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
+/* import 'package:tablas_de_verdad/screens/pro/payment_method.dart'; */
+/* import 'package:in_app_purchase/in_app_purchase.dart'; */
 class ProDetailScreen extends StatelessWidget {
   AppProvider appProvider;
   Size size;

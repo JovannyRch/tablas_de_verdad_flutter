@@ -142,7 +142,7 @@ class Display extends StatelessWidget {
           Positioned(
             left: 10.0,
             child: Row(
-              children: [review, /* IS_PRO_VERSION ? Container() : pro_version */],
+              children: [review, IS_PRO_VERSION ? Container() : pro_version],
             ),
           ),
         ],
@@ -158,9 +158,10 @@ class Display extends StatelessWidget {
   }
 
   void callProVersion(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ProDetailScreen()),
+    String proId = "com.jovannyrch.tablasdeverdad.es.pro";
+    LaunchReview.launch(
+      androidAppId: proId,
+      iOSAppId: "585027354",
     );
   }
 }

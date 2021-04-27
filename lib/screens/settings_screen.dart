@@ -148,7 +148,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   },
                 ),
               ),
-        IS_PRO_VERSION
+       /*  IS_PRO_VERSION
             ? Container()
             : Positioned(
                 left: 10.0,
@@ -169,7 +169,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     await launch(url);
                   },
                 ),
-              ),
+              ), */
         Positioned(
           right: 10.0,
           bottom: 10.0,

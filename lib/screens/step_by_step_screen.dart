@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
-import 'package:tablas_de_verdad/models/Step.dart';
+
 import 'package:tablas_de_verdad/models/TruthTable.dart';
 import 'package:tablas_de_verdad/widgets/StepWidget.dart';
 

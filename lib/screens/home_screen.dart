@@ -12,8 +12,8 @@ import 'package:tablas_de_verdad/widgets/ButtonWidget.dart';
 import 'package:tablas_de_verdad/widgets/DisplayWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/shared/UserPreferences.dart';
-
-import 'package:firebase_admob/firebase_admob.dart';
+/* 
+import 'package:firebase_admob/firebase_admob.dart'; */
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -27,23 +27,23 @@ class _HomeScreenState extends State<HomeScreen> {
   UserPrefences userPrefences = new UserPrefences();
 
   //Ads
-  BannerAd _bannerAd;
+  /* BannerAd _bannerAd;
   InterstitialAd _interstitialAd;
-
+ */
   int counter = 0;
 
   @override
   void initState() {
     super.initState();
-    FirebaseAdMob.instance.initialize(appId: AdmobService.getAdmobId());
+   /*  FirebaseAdMob.instance.initialize(appId: AdmobService.getAdmobId());
     _bannerAd = AdmobService.createBannerAdd()..load();
-    _interstitialAd = AdmobService.createInterstitialAd()..load();
+    _interstitialAd = AdmobService.createInterstitialAd()..load(); */
   }
 
   @override
   void dispose() {
-    _bannerAd?.dispose();
-    _interstitialAd?.dispose();
+/*     _bannerAd?.dispose();
+    _interstitialAd?.dispose(); */
     super.dispose();
   }
 
@@ -320,10 +320,10 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
 
-    if (!IS_PRO_VERSION && !userPrefences.isProMode) {
+    /* if (!IS_PRO_VERSION && !userPrefences.isProMode) {
       _interstitialAd?.show().then((value) =>
           _interstitialAd = AdmobService.createInterstitialAd()..load());
-    }
+    } */
     Navigator.push(
       context,
       CupertinoPageRoute(

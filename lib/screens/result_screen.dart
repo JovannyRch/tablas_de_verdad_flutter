@@ -26,10 +26,8 @@ class _ResultScreenState extends State<ResultScreen> {
   double boxWidth = 60.0;
   Size size;
   AppProvider appProvider;
-/*   AdmobInterstitial interstitialAd; */
+  /* AdmobInterstitial interstitialAd; */
 
-//Ads
-  //Ads
   BannerAd _bannerAd;
   InterstitialAd _interstitialAd;
 

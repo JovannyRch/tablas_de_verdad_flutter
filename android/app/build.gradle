@@ -46,11 +46,11 @@ def keystoreProperties = new Properties()
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.jovannyrch.tablasdeverdad"
+        applicationId "com.jovannyrch.tablasdeverdad.en"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 20205
-        versionName '2.0.5'
+        versionCode 20211
+        versionName '20211'
         multiDexEnabled true
     }
 

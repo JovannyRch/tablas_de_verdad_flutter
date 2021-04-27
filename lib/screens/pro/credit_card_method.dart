@@ -1,5 +1,5 @@
-import 'package:credit_card/credit_card_form.dart';
-import 'package:credit_card/credit_card_widget.dart';
+/* import 'package:credit_card/credit_card_form.dart';
+import 'package:credit_card/credit_card_widget.dart'; */
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tablas_de_verdad/const/conts.dart';
@@ -40,12 +40,12 @@ class _CreditCardMethodState extends State<CreditCardMethod> {
 
   Widget _body(){
     TarjetaCredito tarjetaCredito = tarjetas.first;
-    return CreditCardWidget(
+   /*  return CreditCardWidget(
       cardNumber: tarjetaCredito.cardNumber,
       cvvCode: tarjetaCredito.cvv,
       showBackView: false,
       cardHolderName: tarjetaCredito.cardHolderName,
       expiryDate: tarjetaCredito.expiracyDate,
-    );
+    ); */
   }
 }
