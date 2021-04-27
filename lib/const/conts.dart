@@ -183,10 +183,10 @@ Map<String, String> CREDIT_CARD = {
 const IS_PRO_VERSION = false;
 const IS_TESTING = false;
 
-const APP_ID = "com.jovannyrch.tablasdeverdad.en";
-String TITLE_APP ="Truth Tables";
+const APP_ID = "com.jovannyrch.tablasdeverdad";
+String TITLE_APP ="Tablas de Verdad";
 //TODO 
-const DEFAULT_LANG = EN;
+const DEFAULT_LANG = ES;
 
 
 
