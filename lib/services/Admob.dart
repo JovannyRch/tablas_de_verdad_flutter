@@ -15,7 +15,7 @@ class AdmobService {
       if (IS_TESTING) {
         return "ca-app-pub-3940256099942544~3347511713";
       }
-      return ADMOB_ID; //EN
+      return ADMOB_ID;
     }
     return '';
   }
@@ -27,7 +27,7 @@ class AdmobService {
       if (IS_TESTING) {
         return "ca-app-pub-3940256099942544/1033173712"; 
       }
-      return VIDEO_ID; //EN 
+      return VIDEO_ID; 
     }
   }
 

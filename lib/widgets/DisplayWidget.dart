@@ -12,6 +12,7 @@ class Display extends StatelessWidget {
   Display();
   Size _size;
   AppProvider appProvider;
+  TextEditingController _textFieldController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -124,10 +125,22 @@ class Display extends StatelessWidget {
             ),
           ),
           Positioned(
+            right: 50.0,
+            child: IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.pen,
+                size: 20.0,
+                color: kMainColor,
+              ),
+              onPressed: handleOnClickEdit,
+            ),
+          ),
+          Positioned(
             right: 10.0,
             child: IconButton(
               icon: FaIcon(
                 FontAwesomeIcons.cog,
+                size: 20.0,
               ),
               onPressed: () {
                 Navigator.push(
@@ -154,8 +167,29 @@ class Display extends StatelessWidget {
     LaunchReview.launch(
       androidAppId: APP_ID,
       iOSAppId: "585027354",
-    );
+    ); 
   }
+
+  void handleOnClickEdit(){
+    
+  }
+
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('TextField in Dialog'),
+          content: TextField(
+            onChanged: (value) {
+     
+            },
+            controller: _textFieldController,
+            decoration: InputDecoration(hintText: "Text Field in Dialog"),
+          ),
+        );
+      });
+}
 
   void callProVersion(BuildContext context) {
     String proId = "com.jovannyrch.tablasdeverdad.es.pro";

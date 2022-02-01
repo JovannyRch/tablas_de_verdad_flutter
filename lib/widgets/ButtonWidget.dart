@@ -63,7 +63,7 @@ class Button extends StatelessWidget {
       _getText(),
       style: TextStyle(
         color: getColorText(),
-        fontWeight: isOperator ? FontWeight.w800 : FontWeight.w600,
+        fontWeight: isOperator ? FontWeight.w600 : FontWeight.w400,
         fontSize: getFontSize(),
       ),
     );

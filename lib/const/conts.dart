@@ -183,20 +183,28 @@ Map<String, String> CREDIT_CARD = {
 const IS_PRO_VERSION = false;
 const IS_TESTING = false;
 
-const APP_ID = "com.jovannyrch.tablasdeverdad";
-String TITLE_APP ="Tablas de Verdad";
-//TODO 
-const DEFAULT_LANG = ES;
 
+const Map<String, String> esSettings = {
+  "id": "com.jovannyrch.tablasdeverdad",
+  "title": "Tablas de Verdad",
+  "lang": ES,
+  "ADMOB_ID": "ca-app-pub-3940256099942544~3347511713",
+  "VIDEO_ID": "ca-app-pub-4665787383933447/1003394249"
+};
 
+const Map<String, String> enSettings = {
+  "id": "com.jovannyrch.tablasdeverdad.en",
+  "title": "Truth Tables",
+  "lang": EN,
+  "ADMOB_ID": "ca-app-pub-4665787383933447~1652617896",
+  "VIDEO_ID": "ca-app-pub-4665787383933447/2599030026"
+};
 
-const ADMOB_ID = "ca-app-pub-4665787383933447~1652617896";
-//return 'ca-app-pub-4665787383933447~4689744776'; //ES
-//return 'ca-app-pub-4665787383933447~1652617896'; //EN
+Map<String, String> settings = esSettings;
 
-
-const VIDEO_ID = "ca-app-pub-4665787383933447/6090070907";
-
-//return 'ca-app-pub-4665787383933447/1334937592'; //ES
-//return 'ca-app-pub-4665787383933447/6090070907'; //EN
+String APP_ID = settings["id"];
+String TITLE_APP = settings["title"];
+String DEFAULT_LANG = settings["lang"];
+String ADMOB_ID = settings["ADMOB_ID"];
+String VIDEO_ID = settings["VIDEO_ID"];
 

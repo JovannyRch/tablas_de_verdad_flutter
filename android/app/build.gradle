@@ -48,9 +48,9 @@ def keystoreProperties = new Properties()
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.jovannyrch.tablasdeverdad"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 20212
-        versionName '20212'
+        targetSdkVersion 30
+        versionCode 20214
+        versionName '20214'
         multiDexEnabled true
     }
 
